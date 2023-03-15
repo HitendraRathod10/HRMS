@@ -39,7 +39,7 @@ class _ViewEmployeeAttendance extends State<ViewEmployeeAttendance> with SingleT
       child: Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: AppBar(
-          title: const Text('View Registered Details'),
+          title: const Text('View Registered Details',style: TextStyle(fontFamily: AppFonts.bold),),
           bottom : const TabBar(
             indicatorColor: AppColor.appColor,
             labelColor: AppColor.appColor,
@@ -54,14 +54,14 @@ class _ViewEmployeeAttendance extends State<ViewEmployeeAttendance> with SingleT
                   if(snapshot.connectionState == ConnectionState.waiting){
                     return const Center(child: CircularProgressIndicator());
                   }else if (snapshot.hasError) {
-                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.Medium)));
+                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium)));
                   }
                   else if (!snapshot.hasData) {
                     return  const Center(
-                        child: Text("No Employee Record Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Employee Record Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   } else if (snapshot.requireData.docChanges.isEmpty){
                     return  const Center(
-                        child: Text("No Employee Record Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Employee Record Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   } else{
                     return ListView.builder(
                         itemCount: snapshot.data?.docs.length,
@@ -71,8 +71,8 @@ class _ViewEmployeeAttendance extends State<ViewEmployeeAttendance> with SingleT
                             onTap: (){Get.to(AttendanceDetailsScreen(email: snapshot.data!.docs[index].id,passType: 'Admin',));},
                             child: ListTile(
                               tileColor: index.isOdd ? Colors.blueGrey.shade50 : Colors.white,
-                              leading: Text('${index+1}',style: const TextStyle(fontFamily: AppFonts.Medium)),
-                              title: Text(snapshot.data!.docs[index].id,style: const TextStyle(fontFamily: AppFonts.Medium)),
+                              leading: Text('${index+1}',style: const TextStyle(fontFamily: AppFonts.medium)),
+                              title: Text(snapshot.data!.docs[index].id,style: const TextStyle(fontFamily: AppFonts.medium)),
                               trailing: const Icon(Icons.arrow_forward_ios,size: 12,),
                             ),
                           );
@@ -87,14 +87,14 @@ class _ViewEmployeeAttendance extends State<ViewEmployeeAttendance> with SingleT
                   if(snapshot.connectionState == ConnectionState.waiting){
                     return const Center(child: CircularProgressIndicator());
                   }else if (snapshot.hasError) {
-                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.Medium)));
+                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium)));
                   }
                   else if (!snapshot.hasData) {
                     return  const Center(
-                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   } else if (snapshot.requireData.docChanges.isEmpty){
                     return  const Center(
-                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   }
                   else{
                     return ListView.builder(
@@ -103,8 +103,8 @@ class _ViewEmployeeAttendance extends State<ViewEmployeeAttendance> with SingleT
                         itemBuilder: (context,index) {
                           return ListTile(
                             tileColor: index.isOdd ? Colors.blueGrey.shade50 : Colors.white,
-                            leading: Text('${index+1}',style: const TextStyle(fontFamily: AppFonts.Medium)),
-                            title: Text(snapshot.data!.docs[index].id,style: const TextStyle(fontFamily: AppFonts.Medium)),
+                            leading: Text('${index+1}',style: const TextStyle(fontFamily: AppFonts.medium)),
+                            title: Text(snapshot.data!.docs[index].id,style: const TextStyle(fontFamily: AppFonts.medium)),
                           );
                         }
                     );

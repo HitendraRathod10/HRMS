@@ -22,7 +22,7 @@ class _ReportScreenState extends State<ReportScreen> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Reports'),
+        title: const Text('Reports',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: Column(
         children: [
@@ -41,8 +41,8 @@ class _ReportScreenState extends State<ReportScreen> {
                 margin: const EdgeInsets.only(top:30,left: 20,right: 20,bottom: 20),
                 child: Row(
                   children:  [
-                    const Expanded(flex:1,child: Text('1',style: TextStyle(fontSize: 18,fontFamily: AppFonts.Medium))),
-                    const Expanded(flex:7,child: Text('Attendance Reports',style: TextStyle(fontSize: 18,fontFamily: AppFonts.Medium))),
+                    const Expanded(flex:1,child: Text('1',style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium))),
+                    const Expanded(flex:7,child: Text('Attendance Reports',style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium))),
                     Expanded(flex:1,child: Icon(visibleAttendanceReports == true ? Icons.keyboard_arrow_up_outlined : Icons.keyboard_arrow_down_sharp))
                   ],
                 ),
@@ -67,7 +67,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.transparent
                       ),
-                      child: const Text('Employee Inout Present',style: TextStyle(fontFamily: AppFonts.Regular))),
+                      child: const Text('Employee Inout Present',style: TextStyle(fontFamily: AppFonts.regular))),
                 ),
                 const SizedBox(height: 10),
                 GestureDetector(
@@ -85,7 +85,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.transparent
                       ),
-                      child: const Text('In-Out Summary',style: TextStyle(fontFamily: AppFonts.Regular))),
+                      child: const Text('In-Out Summary',style: TextStyle(fontFamily: AppFonts.regular))),
                 ),
                /* const SizedBox(height: 10),
                 GestureDetector(

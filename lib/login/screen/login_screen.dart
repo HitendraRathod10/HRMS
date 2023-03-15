@@ -34,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
   // bool chooseValue = false;
   late TabController customerTabController;
   final List<Widget> _tabs = [
-    const Tab(child: FittedBox(child: Text('Admin',style: TextStyle(fontSize: 20)))),
-    const Tab(child: FittedBox(child: Text('Employee',style: TextStyle(fontSize: 20)))),
+    const Tab(child: FittedBox(child: Text('Employee',style: TextStyle(fontSize: 20,fontFamily: AppFonts.bold)))),
+    const Tab(child: FittedBox(child: Text('Admin',style: TextStyle(fontSize: 20,fontFamily: AppFonts.bold)))),
   ];
 
   @override

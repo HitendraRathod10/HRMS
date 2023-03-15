@@ -37,7 +37,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
       child: Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: AppBar(
-          title: const Text('Add Public Holiday'),
+          title: const Text('Add Public Holiday',style: TextStyle(fontFamily: AppFonts.bold),),
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -49,7 +49,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
 
                 Container(
                     padding: const EdgeInsets.only(left: 25,bottom: 5),
-                    child: const Text('Holiday Date',style: TextStyle(fontFamily: AppFonts.Medium))),
+                    child: const Text('Holiday Date',style: TextStyle(fontFamily: AppFonts.medium))),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -73,7 +73,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                                 children: [
                                   const Icon(Icons.date_range_outlined,color: AppColor.appColor,),
                                   const SizedBox(width: 10),
-                                  Text(snapshot.picked==null? 'Please Select Date' : DateFormat('dd-MM-yyyy').format(snapshot.holidayDate),style: const TextStyle(fontFamily: AppFonts.Regular)),
+                                  Text(snapshot.picked==null? 'Please Select Date' : DateFormat('dd-MM-yyyy').format(snapshot.holidayDate),style: const TextStyle(fontFamily: AppFonts.regular)),
                                 ],
                               ),
                             ),
@@ -88,12 +88,12 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                     visible: fromDateValidation== false ? false : true,
                     child: const Padding(
                         padding: EdgeInsets.only(left: 30),
-                        child:  Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor),))),
+                        child:  Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor,fontFamily: AppFonts.regular),))),
                 const SizedBox(height: 10),
 
                 Container(
                     padding: const EdgeInsets.only(left: 25,bottom: 5,top: 10),
-                    child: const Text('Holiday Name',style: TextStyle(fontFamily: AppFonts.Medium))),
+                    child: const Text('Holiday Name',style: TextStyle(fontFamily: AppFonts.medium))),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextFormField(
@@ -118,7 +118,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
 
                 Container(
                     padding: const EdgeInsets.only(left: 25,bottom: 5,top: 15),
-                    child: const Text('Description',style: TextStyle(fontFamily: AppFonts.Medium),)),
+                    child: const Text('Description',style: TextStyle(fontFamily: AppFonts.medium),)),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Scrollbar(

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -131,7 +132,7 @@ class _AddEmployeeState extends State<AddEmployee> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Add Employee'),
+        title: const Text('Add Employee',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: Center(
         child: SingleChildScrollView(

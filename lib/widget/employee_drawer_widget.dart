@@ -27,10 +27,10 @@ class EmployeeDrawerScreen extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>?> snapshot) {
 
                   if(snapshot.connectionState == ConnectionState.none){
-                    return const Text('Something went wrong');
+                    return const Text('Something went wrong',style: TextStyle(fontFamily: AppFonts.regular),);
                   }
                   else if(!snapshot.hasData){
-                    return const Text('Unable to fin data');
+                    return const Text('Unable to fin data',style: TextStyle(fontFamily: AppFonts.regular),);
                   }
                   else{
                     Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -45,7 +45,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
                               height: 70,width: 70,
                               child: Center(
                                 child: Text('${data['employeeName']?.substring(0,1).toUpperCase()}',
-                                  style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.Medium),),
+                                  style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.medium),),
                               )) :
                           Image.network(
                               '${data['imageUrl']}',
@@ -56,8 +56,8 @@ class EmployeeDrawerScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
                             const SizedBox(height: 5),
-                            Text('${data['employeeName']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.Regular)),
-                            Text('${FirebaseAuth.instance.currentUser?.email}',style: const TextStyle(color: AppColor.blackColor,fontFamily: AppFonts.Regular),),
+                            Text('${data['employeeName']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.regular)),
+                            Text('${FirebaseAuth.instance.currentUser?.email}',style: const TextStyle(color: AppColor.blackColor,fontFamily: AppFonts.regular),),
                           ],
                         ),
                       ],
@@ -69,7 +69,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
           Divider(height: 1,color: AppColor.darkGreyColor,),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('Home',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Home',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
              // Navigator.pop(context);
               Get.back();
@@ -77,7 +77,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('Profile',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Profile',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
               Navigator.pop(context);
               Get.to(const EmployeeProfileScreen(),
@@ -98,7 +98,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
 */
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Logout',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Logout',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
               FirebaseAuth.instance.signOut();
               AppUtils.instance.clearPref().then((value) => Get.offAll(LoginScreen()));

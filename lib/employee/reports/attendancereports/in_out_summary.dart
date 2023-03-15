@@ -36,7 +36,7 @@ class _InOutSummaryState extends State<InOutSummary> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('In Out Summary'),
+        title: const Text('In Out Summary',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: SingleChildScrollView(
           child: Consumer<ReportsProvider>(
@@ -50,7 +50,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                     const Center(
                         child: Text(
                           'EMPLOYEE INOUT SUMMARY',
-                          style: TextStyle(fontSize: 18, fontFamily: AppFonts.Medium),
+                          style: TextStyle(fontSize: 18, fontFamily: AppFonts.medium),
                         )),
                     GestureDetector(
                       onTap: () {
@@ -75,7 +75,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                             Container(
                                 padding: const EdgeInsets.only(left: 15, bottom: 5),
                                 child: const Text('From Date',
-                                    style: TextStyle(fontFamily: AppFonts.Medium,fontSize: 16))),
+                                    style: TextStyle(fontFamily: AppFonts.medium,fontSize: 16))),
                             Container(
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
@@ -87,7 +87,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                                   DateFormat('dd-MM-yyyy')
                                       .format(snapshot.reportsFromDate),
                                   style: const TextStyle(
-                                      fontSize: 16, fontFamily: AppFonts.Medium)),
+                                      fontSize: 16, fontFamily: AppFonts.medium)),
                             ),
                           ],
                         ),
@@ -107,7 +107,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                             Container(
                                 padding: const EdgeInsets.only(left: 15, bottom: 5),
                                 child: const Text('To Date',
-                                    style: TextStyle(fontFamily: AppFonts.Medium,fontSize: 16))),
+                                    style: TextStyle(fontFamily: AppFonts.medium,fontSize: 16))),
                             Container(
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                                       snapshot.reportsFromDate.month + 1, 0))
                                       .toString(),
                                   style: const TextStyle(
-                                      fontSize: 16, fontFamily: AppFonts.Medium)),
+                                      fontSize: 16, fontFamily: AppFonts.medium)),
                               // child: Text(DateFormat('dd-MM-yyyy').format(snapshot.reportsToDate),style: const TextStyle(fontSize: 16,fontFamily: AppFonts.Medium)),
                             ),
                           ],
@@ -149,7 +149,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                                 context
                               ).then((value) => Get.to(OpenPdfInOutSummary(linked: value,)));
                             },
-                            child: const Text('View')),
+                            child: const Text('View',style: TextStyle(fontFamily: AppFonts.medium),)),
                         const SizedBox(
                           width: 50,
                         ),
@@ -162,7 +162,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                               backgroundColor:
                               AppColor.appColor, //// Text Color
                             ),
-                            child: const Text('Back')),
+                            child: const Text('Back',style: TextStyle(fontFamily: AppFonts.medium),)),
                       ],
                     )
                   ],

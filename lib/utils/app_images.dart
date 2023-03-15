@@ -1,5 +1,7 @@
 class AppImage{
   static const appLogo="assets/images/applogo.png";
+  static const appIconLogo="assets/images/hrms.png";
+  static const appIconNew="assets/images/hrmsNew.png";
   static const entryExit="assets/images/entry_exit.png";
   static const timeSlot="assets/images/attendance_details.png";
   static const leave="assets/images/leave.png";

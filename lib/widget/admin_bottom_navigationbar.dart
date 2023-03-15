@@ -1,5 +1,6 @@
 import 'package:employee_attendance_app/admin/adminProfile/admin_profile_screen.dart';
 import 'package:employee_attendance_app/admin/home/screen/admin_home_screen.dart';
+import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
 import '../admin/adminProfile/admin_profile.dart';
 import '../utils/app_colors.dart';
@@ -35,8 +36,8 @@ class _AdminBottomNavBarScreenState extends State<AdminBottomNavBarScreen> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         backgroundColor: AppColor.whiteColor,
-        selectedLabelStyle: const TextStyle(color: AppColor.appColor),
-        unselectedLabelStyle: const TextStyle(color: AppColor.appBlackColor,),
+        selectedLabelStyle: const TextStyle(color: AppColor.appColor,fontFamily: AppFonts.bold),
+        unselectedLabelStyle: const TextStyle(color: AppColor.appBlackColor,fontFamily: AppFonts.regular),
         selectedItemColor: AppColor.appColor,
         unselectedItemColor: AppColor.greyColor,
         onTap: _onItemTapped,

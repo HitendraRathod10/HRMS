@@ -135,7 +135,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
         appBar: AppBar(
-          title: const Text('Apply Leave'),
+          title: const Text('Apply Leave',style: TextStyle(fontFamily: AppFonts.bold),),
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -170,12 +170,12 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                   return 'Leave type is required';
                                 }
                               },
-                              hint: const Text('Select Leave Type',style: TextStyle(fontFamily: AppFonts.Medium)),
+                              hint: const Text('Select Leave Type',style: TextStyle(fontFamily: AppFonts.medium)),
                               isExpanded: true,
                               isDense: true,
                               buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                               buttonHeight: 20,
-                              style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.Medium),
+                              style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
                               iconOnClick: const Icon(Icons.arrow_drop_up),
                               icon: const Icon(Icons.arrow_drop_down),
                               scrollbarRadius: const Radius.circular(40),
@@ -220,7 +220,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                           const SizedBox(height: 10),
                           Container(
                               padding: const EdgeInsets.only(left: 25,bottom: 5),
-                              child: const Text('Leave From Date',style: TextStyle(fontFamily: AppFonts.Medium))),
+                              child: const Text('Leave From Date',style: TextStyle(fontFamily: AppFonts.medium))),
                           GestureDetector(
                             onTap : () {
                               selectFromDate(context);
@@ -245,7 +245,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                       children: [
                                         const Icon(Icons.date_range_outlined,color: AppColor.appColor),
                                         const SizedBox(width: 10),
-                                        Text(pickedFrom == null ? "Please select date" : DateFormat('dd-MM-yyyy').format(snapshot.leaveFromDate),style: const TextStyle(fontSize: 16,fontFamily: AppFonts.Medium)),
+                                        Text(pickedFrom == null ? "Please select date" : DateFormat('dd-MM-yyyy').format(snapshot.leaveFromDate),style: const TextStyle(fontSize: 16,fontFamily: AppFonts.medium)),
                                       ],
                                     ),
                                   ),
@@ -260,12 +260,12 @@ class _LeaveScreenState extends State<LeaveScreen> {
                               visible: fromDateValidation== false ? false : true,
                               child: const Padding(
                                 padding: EdgeInsets.only(left: 30),
-                                child: Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor),),
+                                child: Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor,fontFamily: AppFonts.regular),),
                               )),
                           const SizedBox(height: 10,),
                           Container(
                               padding: const EdgeInsets.only(left: 25,bottom: 5),
-                              child: const Text('Leave To Date',style: TextStyle(fontFamily: AppFonts.Medium))),
+                              child: const Text('Leave To Date',style: TextStyle(fontFamily: AppFonts.regular))),
                           GestureDetector(
                             onTap : () {
                               selectToDate(context);
@@ -291,7 +291,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                       children: [
                                         const Icon(Icons.date_range_outlined,color: AppColor.appColor,),
                                         const SizedBox(width: 10),
-                                        Text(pickedTo == null ? "Please select date" : DateFormat('dd-MM-yyyy').format(snapshot.leaveToDate),style: const TextStyle(fontSize: 16,fontFamily: AppFonts.Medium)),
+                                        Text(pickedTo == null ? "Please select date" : DateFormat('dd-MM-yyyy').format(snapshot.leaveToDate),style: const TextStyle(fontSize: 16,fontFamily: AppFonts.medium)),
                                       ],
                                     ),
                                   ),
@@ -309,13 +309,13 @@ class _LeaveScreenState extends State<LeaveScreen> {
                               visible: toDateValidation== false ? false : true,
                               child: const Padding(
                                   padding: EdgeInsets.only(left: 30),
-                                  child:  Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor),))),
+                                  child:  Text('Please choose date',style: TextStyle(fontSize: 12,color: AppColor.redColor,fontFamily: AppFonts.medium),))),
 
                           Visibility(
                             visible: snapshot.selectLeaveType != 'Flexi Leave' ? true : false,
                             child: const Padding(
                               padding: EdgeInsets.only(left: 25,bottom: 5,top: 10),
-                              child: Text('No of days',style: TextStyle(fontFamily: AppFonts.Medium)),
+                              child: Text('No of days',style: TextStyle(fontFamily: AppFonts.medium)),
                             ),),
                           Visibility(
                             visible: snapshot.selectLeaveType != 'Flexi Leave' ? true : false,
@@ -327,7 +327,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                 controller: daysController..text =
                                     '${pickedTo == null ? '0' : pickedFrom==null || pickedTo==null ? snapshot.countLeave : snapshot.countLeave+1}',
                                 readOnly: true,
-                                style: const TextStyle(fontFamily: AppFonts.Medium),
+                                style: const TextStyle(fontFamily: AppFonts.medium),
                                 textInputAction: TextInputAction.done,
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
@@ -453,14 +453,14 @@ class _LeaveScreenState extends State<LeaveScreen> {
                           Visibility(
                             visible: snapshot.selectLeaveType == 'Flexi Leave' ? true : false,
                             child: TimeRange(
-                              fromTitle: const Text('From Time',style: TextStyle(fontFamily: AppFonts.Medium)),
-                              toTitle: const Text('To Time',style: TextStyle(fontFamily: AppFonts.Medium)),
+                              fromTitle: const Text('From Time',style: TextStyle(fontFamily: AppFonts.medium)),
+                              toTitle: const Text('To Time',style: TextStyle(fontFamily: AppFonts.medium)),
                               titlePadding: 20,
-                              activeTextStyle: const TextStyle(color: Colors.white,fontFamily: AppFonts.Medium),
+                              activeTextStyle: const TextStyle(color: Colors.white,fontFamily: AppFonts.medium),
                               backgroundColor: Colors.transparent,
                               borderColor: AppColor.appColor,
                               activeBorderColor: AppColor.appColor,
-                              textStyle:const TextStyle(fontFamily: AppFonts.Medium),
+                              textStyle:const TextStyle(fontFamily: AppFonts.medium),
                               activeBackgroundColor: AppColor.appColor,
                               firstTime: const TimeOfDay(hour: 09, minute: 30),
                               lastTime: const TimeOfDay(hour: 19, minute: 00),
@@ -483,7 +483,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                             visible: snapshot.selectLeaveType == 'Flexi Leave' ? true : false,
                             child: const Padding(
                                 padding: EdgeInsets.only(left: 25,bottom: 5,top: 10),
-                                child: Text('No of hours',style: TextStyle(fontFamily: AppFonts.Medium))),
+                                child: Text('No of hours',style: TextStyle(fontFamily: AppFonts.medium))),
                           ),
                           Visibility(
                             visible: snapshot.selectLeaveType == 'Flexi Leave' ? true : false,
@@ -493,7 +493,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                 cursorColor:  AppColor.appColor,
                                 keyboardType: TextInputType.number,
                                 readOnly: true,
-                                style: const TextStyle(fontFamily: AppFonts.Medium),
+                                style: const TextStyle(fontFamily: AppFonts.medium),
                                 controller: hourController..text = snapshot.countHour.toString(),
                                 textInputAction: TextInputAction.next,
                                 decoration: const InputDecoration(
@@ -519,7 +519,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
 
                           Container(
                               padding: const EdgeInsets.only(left: 25,bottom: 5,top: 10),
-                              child: const Text('Reason',style: TextStyle(fontFamily: AppFonts.Medium))),
+                              child: const Text('Reason',style: TextStyle(fontFamily: AppFonts.medium))),
                           Padding(
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             child: Scrollbar(
@@ -528,7 +528,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                 scrollController: scrollController,
                                 // minLines: 3,
                                 maxLines: 3,
-                                style: const TextStyle(fontFamily: AppFonts.Medium),
+                                style: const TextStyle(fontFamily: AppFonts.medium),
                                 keyboardType: TextInputType.multiline,
                                 controller: reasonController,
                                 textInputAction: TextInputAction.done,

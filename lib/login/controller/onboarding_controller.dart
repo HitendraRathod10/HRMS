@@ -22,11 +22,11 @@ class OnboardingController extends GetxController {
   }
 
   List<OnboardingInfo> onboardingPages = [
-    OnboardingInfo(AppImage.entryExit, 'Entry Exit',
+    OnboardingInfo('https://cdn-icons-png.flaticon.com/512/198/198141.png', 'Entry Exit',
         'A employee can add daily In Out and view the attendance details',AppColor.appColor),
-    OnboardingInfo(AppImage.event, 'Holiday',
+    OnboardingInfo('https://cdn-icons-png.flaticon.com/512/3634/3634857.png', 'Holiday',
         'A employee can view public holiday',AppColor.darkGreyColor),
-    OnboardingInfo(AppImage.leaveStatus, 'Employee Attendance',
+    OnboardingInfo('https://cdn-icons-png.flaticon.com/512/3387/3387310.png', 'Employee Attendance',
         'A employee can apply for a leave and also check the leave status',AppColor.appColor),
   ];
 }

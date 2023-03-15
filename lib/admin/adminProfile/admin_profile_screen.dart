@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/firebase/firebase_collection.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
+import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text('Edit Profile',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -43,7 +44,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
                 print('Something went wrong');
-                return const Text("Something went wrong");
+                return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
                 return const Center(child: CircularProgressIndicator());

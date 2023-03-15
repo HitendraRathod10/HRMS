@@ -30,7 +30,7 @@ class ResetPasswordScreen extends StatelessWidget {
                      height: 100,width: 100,fit: BoxFit.fill),
                   ),
                   const SizedBox(height: 20,),
-                  const Text('Reset Your Password',style: TextStyle(fontSize: 20,fontFamily: AppFonts.Medium)),
+                  const Text('Reset Your Password',style: TextStyle(fontSize: 20,fontFamily: AppFonts.medium)),
                   const SizedBox(height: 70,),
                   TextFieldMixin().textFieldCardWidget(
                     controller: emailController,

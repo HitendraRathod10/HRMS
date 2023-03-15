@@ -21,6 +21,17 @@ class AdminProfile extends StatefulWidget {
 
 class _AdminProfileState extends State<AdminProfile> {
 
+  String capitalizeAllWord(String value) {
+    var result = value[0].toUpperCase();
+    for (int i = 1; i < value.length; i++) {
+      if (value[i - 1] == " ") {
+        result = result + value[i].toUpperCase();
+      } else {
+        result = result + value[i];
+      }
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +43,7 @@ class _AdminProfileState extends State<AdminProfile> {
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
                 print('Something went wrong');
-                return const Text("Something went wrong");
+                return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
                 print('Document does not exist');
@@ -45,8 +56,19 @@ class _AdminProfileState extends State<AdminProfile> {
                         children: [
                           Container(
                             height: MediaQuery.of(context).size.height/3,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(60),bottomLeft: Radius.circular(60)),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    AppColor.appColor.withOpacity(0.9),
+                                    AppColor.appColor.withOpacity(0.4),
+                                  ],
+                                ),
+                              borderRadius: const BorderRadius.only(
+                                  bottomRight: Radius.circular(60),
+                                  bottomLeft: Radius.circular(60)
+                              ),
                               color: AppColor.appColor,
                             ),
                           ),
@@ -60,15 +82,16 @@ class _AdminProfileState extends State<AdminProfile> {
                                   const SizedBox(height: 20),
                                   ClipOval(
                                       child: Container(
-                                          color: AppColor.redColor,
+                                          color: AppColor.whiteColor,
                                           height: 70,width: 70,
                                           child: Center(
                                             child: Text('${data['companyName']?.substring(0,1).toUpperCase()}',
-                                                style: const TextStyle(color: AppColor.whiteColor,fontSize: 30,fontFamily: AppFonts.Regular)),
+                                                style: const TextStyle(color: AppColor.appColor,fontSize: 30,fontFamily: AppFonts.regular)),
                                           ))
                                   ),
-                                  Text(data['companyName'],
-                                      style: const TextStyle(fontSize: 24,color: AppColor.whiteColor)),
+                                  const SizedBox(height: 30,),
+                                  Text(capitalizeAllWord(data['companyName'].toString()),
+                                      style: TextStyle(fontSize: 35,color: AppColor.whiteColor,fontFamily: AppFonts.medium)),
                                 ],
                               ),
                             ),
@@ -106,7 +129,7 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['companyName'])),
+                                child: Text(data['companyName'],style: TextStyle(fontFamily: AppFonts.regular),)),
                           ],
                         ),
                       ),
@@ -126,7 +149,7 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['email'])),
+                                child: Text(data['email'],style: TextStyle(fontFamily: AppFonts.regular))),
                           ],
                         ),
                       ),
@@ -146,7 +169,7 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['mobile'])),
+                                child: Text(data['mobile'],style: TextStyle(fontFamily: AppFonts.regular))),
                           ],
                         ),
                       ),
@@ -174,5 +197,10 @@ class _AdminProfileState extends State<AdminProfile> {
         ),
       ),
     );
+  }
+}
+extension StringExtension on String {
+  String capitalizeText() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }

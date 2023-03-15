@@ -19,84 +19,96 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            PageView.builder(
-                controller: _controller.pageController,
-                onPageChanged: _controller.selectedPageIndex,
-                itemCount: _controller.onboardingPages.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                          _controller.onboardingPages[index].imageAsset,height: 200),
-                      const SizedBox(height: 40),
-                      Text(
-                        _controller.onboardingPages[index].title,textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 24,fontFamily: AppFonts.Medium),
-                      ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:50.0),
-                        child: Text(
-                          _controller.onboardingPages[index].description,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 18,fontFamily: AppFonts.Regular),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: GestureDetector(
-                  onTap: (){
-                    Get.off(LoginScreen());
-                  },
-                  child: Container(
-                    color: Colors.transparent,
-                      height:40,width:70,child: const Center(child: Text('Skip',textAlign: TextAlign.center,style: TextStyle(fontFamily: AppFonts.Medium),))),
-                ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColor.appColor.withOpacity(0.5),
+                AppColor.appColor.withOpacity(0.0),
+              ],
             ),
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: Row(
-                children: List.generate(
-                  _controller.onboardingPages.length,
-                      (index) => Obx(() {
-                    return Container(
-                      margin: const EdgeInsets.all(4),
-                      width: 15,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: _controller.selectedPageIndex.value == index
-                            ? AppColor.appColor
-                            : AppColor.backgroundColor,
-                        shape: BoxShape.rectangle,
-                      ),
+          ),
+          child: Stack(
+            children: [
+              PageView.builder(
+                  controller: _controller.pageController,
+                  onPageChanged: _controller.selectedPageIndex,
+                  itemCount: _controller.onboardingPages.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                            _controller.onboardingPages[index].imageAsset,height: 200),
+                        const SizedBox(height: 80),
+                        Text(
+                          _controller.onboardingPages[index].title,textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 30,fontFamily: AppFonts.bold),
+                        ),
+                        const SizedBox(height: 25),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal:50.0),
+                          child: Text(
+                            _controller.onboardingPages[index].description,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 20,fontFamily: AppFonts.regular),
+                          ),
+                        ),
+                      ],
                     );
                   }),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: GestureDetector(
+                    onTap: (){
+                      Get.off(LoginScreen());
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                        height:40,width:70,child: const Center(child: Text('Skip',textAlign: TextAlign.center,style: TextStyle(fontFamily: AppFonts.medium),))),
+                  ),
+              ),
+              Positioned(
+                bottom: 20,
+                left: 20,
+                child: Row(
+                  children: List.generate(
+                    _controller.onboardingPages.length,
+                        (index) => Obx(() {
+                      return Container(
+                        margin: const EdgeInsets.all(4),
+                        width: 15,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: _controller.selectedPageIndex.value == index
+                              ? AppColor.appColor
+                              : AppColor.backgroundColor,
+                          shape: BoxShape.rectangle,
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              right: 10,
-              bottom: 10,
-              child: Obx(() {
-                return GestureDetector(
-                  onTap: _controller.forwardAction,
-                  child: Container(
-                      color: Colors.transparent,
-                      height:40,width:100,child: Center(child: Text(_controller.isLastPage ? 'Get Started' : 'Next -->',textAlign: TextAlign.center,style: const TextStyle(fontFamily: AppFonts.Medium),))),
-                );
-              }),
-            ),
-          ],
+              Positioned(
+                right: 10,
+                bottom: 10,
+                child: Obx(() {
+                  return GestureDetector(
+                    onTap: _controller.forwardAction,
+                    child: Container(
+                        color: Colors.transparent,
+                        height:40,width:100,child: Center(child: Text(_controller.isLastPage ? 'Get Started' : 'Next -->',textAlign: TextAlign.center,style: const TextStyle(fontFamily: AppFonts.medium),))),
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );

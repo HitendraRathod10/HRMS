@@ -29,6 +29,17 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
   DateTime now = DateTime.now();
   var hour = DateTime.now().hour;
   final ScrollController controller = ScrollController();
+  String capitalizeAllWord(String value) {
+    var result = value[0].toUpperCase();
+    for (int i = 1; i < value.length; i++) {
+      if (value[i - 1] == " ") {
+        result = result + value[i].toUpperCase();
+      } else {
+        result = result + value[i];
+      }
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +80,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                           stream: getEmployeeData,
                           builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
                             if (snapshot.hasError) {
-                              return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.Medium));
+                              return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium));
                             } else if (snapshot.connectionState == ConnectionState.done) {
                               return const Center(child: CircularProgressIndicator(),);
                             }
@@ -92,7 +103,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                                         color: AppColor.backgroundColor,
                                         height: 80,width: 80,child: Center(
                                         child: Text('${data['employeeName']?.substring(0,1).toUpperCase()}',
-                                          style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.Medium),),
+                                          style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.medium),),
                                       ),) :
                                       Image.network(
                                           '${data['imageUrl']}',
@@ -105,10 +116,10 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                       Text('Hi, ${data['employeeName']}',style: TextStyle(fontFamily: AppFonts.Medium,color: AppColor.backgroundColor),),
+                                       Text('Hi, ${capitalizeAllWord(data['employeeName'])}',style: TextStyle(fontFamily: AppFonts.medium,color: AppColor.backgroundColor),),
                                       const SizedBox(height: 3),
                                       Text(hour < 12 ? 'Good Morning' :
-                                      hour < 17 ? 'Good Afternoon' : 'Good Evening',style: const TextStyle(fontFamily: AppFonts.Bold,fontSize: 24,color: AppColor.whiteColor)),
+                                      hour < 17 ? 'Good Afternoon' : 'Good Evening',style: const TextStyle(fontFamily: AppFonts.bold,fontSize: 24,color: AppColor.whiteColor)),
                                     ],
                                   ),
                                 ],
@@ -234,7 +245,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                   const SizedBox(height: 40),
                   Container(
                       padding: const EdgeInsets.only(left: 30),
-                      child: Text(date.toString().replaceAll("00:00:00.000", ""),style: const TextStyle(fontSize: 20,color: AppColor.greyColorLight,fontFamily: AppFonts.Medium))),
+                      child: Text(date.toString().replaceAll("00:00:00.000", ""),style: const TextStyle(fontSize: 20,color: AppColor.greyColorLight,fontFamily: AppFonts.medium))),
                   const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.only(left: 20,right: 20),
@@ -246,15 +257,15 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                             Get.to(PublicHolidayScreen(),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.holidays,
-                              'Public Holiday','Check allocated public holiday',AppColor.greyColorLight),
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/3634/3634857.png',
+                              'Public Holiday','Check allocated public holiday',AppColor.appColor),
                         ),
                         GestureDetector(
                           onTap: () {
                             Get.to(const EmployeeInOutScreen(),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.entryExit,
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/4158/4158668.png',
                               'Entry Exit','Fill the attendance today is present or not',AppColor.appColor.withOpacity(0.4)),
                         ),
                       ],
@@ -271,15 +282,15 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                             Get.to(AttendanceDetailsScreen(passType: 'Employee', email: '',),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.timeSlot,
-                              'Attendance Details','Check your entry exit time details',Colors.amberAccent.withOpacity(0.4)),
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/1286/1286827.png',
+                              'Attendance Details','Check your entry exit time details',AppColor.appColor.withOpacity(0.4)),
                         ),
                         GestureDetector(
                           onTap: (){
                             Get.to(LeaveScreen(),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.leave, 'Apply Leave','Applying for a leave',Colors.green.withOpacity(0.4)),
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/3387/3387310.png', 'Apply Leave','Applying for a leave',AppColor.appColor.withOpacity(0.4)),
                         ),
 
                       ],
@@ -296,15 +307,15 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                             Get.to(const LeaveStatusApplied(),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.leaveStatus,
-                              'Leave Status','Check your entry exit time details',Colors.red.withOpacity(0.4)),
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/198/198141.png',
+                              'Leave Status','Check your entry exit time details',AppColor.appColor.withOpacity(0.4)),
                         ),
                         GestureDetector(
                           onTap: (){
                             Get.to(const ReportScreen(),
                                 transition: Transition.rightToLeftWithFade);
                           },
-                          child: dashboardDetailsWidget(AppImage.reports, 'Reports','Check your reports month wise',Colors.cyanAccent.withOpacity(0.4)),
+                          child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/1690/1690427.png', 'Reports','Check your reports month wise',AppColor.appColor.withOpacity(0.4)),
                         ),
                       ],
                     ),

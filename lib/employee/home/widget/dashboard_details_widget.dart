@@ -1,3 +1,4 @@
+import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -38,15 +39,15 @@ Widget dashboardDetailsWidget(
                 Padding(
                   padding:
                   const EdgeInsets.only( top: 10),
-                  child: Image.asset(imageLocation,
-                      height: 60, width: 60, fit: BoxFit.contain),
+                  child: Image.network(imageLocation,
+                      height: 55, width: 55, fit: BoxFit.contain,color: AppColor.appColor,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                       top: 5,),
+                       top: 20,),
                   child: Text(title,
                       style: const TextStyle(
-                          fontSize: 16, fontFamily: AppFonts.Medium),
+                          fontSize: 16, fontFamily: AppFonts.medium),
                       textAlign: TextAlign.start),
                 ),
                 Padding(
@@ -54,7 +55,7 @@ Widget dashboardDetailsWidget(
                       top: 5),
                   child: Text(description,
                       style: const TextStyle(
-                          fontSize: 12, fontFamily: AppFonts.Medium),
+                          fontSize: 12, fontFamily: AppFonts.medium),
                       textAlign: TextAlign.center),
                 ),
               ],

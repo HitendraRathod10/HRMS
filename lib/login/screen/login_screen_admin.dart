@@ -55,7 +55,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                 children: [
                   // const SizedBox(height: 50),
                   Center(
-                    child:Image.asset(AppImage.appLogo,height: 150,width: 150,fit: BoxFit.fill),
+                    child:Image.asset(AppImage.appIconNew,height: 150,width: 150,fit: BoxFit.fill),
                   ),
                   /* Align(
                     alignment: Alignment.topCenter,
@@ -98,13 +98,13 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                   const Text(
                     "Login",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24,fontFamily: AppFonts.Medium),
+                    style: TextStyle(fontSize: 24,fontFamily: AppFonts.medium),
                   ),
                   const SizedBox(height: 10),
                   const Text(
                     'Please sign in to continue',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontFamily: AppFonts.Light),
+                    style: TextStyle(fontFamily: AppFonts.regular),
                   ),
                   const SizedBox(height: 40),
                   TextFieldMixin().textFieldCardWidget(
@@ -160,7 +160,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                       onTap: (){
                         Get.to(ResetPasswordScreen());
                       },
-                      child: const Text('Reset Password',style: TextStyle(fontFamily: AppFonts.Light),)),
+                      child: const Text('Reset Password',style: TextStyle(fontFamily: AppFonts.regular),)),
                   const SizedBox(height: 30),
 
                   Align(

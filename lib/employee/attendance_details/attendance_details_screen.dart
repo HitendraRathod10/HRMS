@@ -37,7 +37,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Attendance Details'),
+        title: const Text('Attendance Details',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +53,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                 children: [
                   const Expanded(
                     flex: 1,
-                    child: Text('Month',style: TextStyle(fontFamily: AppFonts.Medium),),
+                    child: Text('Month',style: TextStyle(fontFamily: AppFonts.medium),),
                   ),
 
                   Expanded(
@@ -88,7 +88,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                           .map<DropdownMenuItem<String>>((String leaveName) {
                         return DropdownMenuItem<String>(
                             value: leaveName,
-                            child: Text(leaveName)
+                            child: Text(leaveName,style: TextStyle(fontFamily: AppFonts.regular),)
                         );
                       }).toList(),
                     ),
@@ -106,7 +106,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                 children: [
                   const Expanded(
                     flex: 1,
-                    child: Text('Year',style: TextStyle(fontFamily: AppFonts.Medium)),
+                    child: Text('Year',style: TextStyle(fontFamily: AppFonts.medium)),
                   ),
 
                   Expanded(
@@ -141,7 +141,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                           .map<DropdownMenuItem<String>>((String leaveName) {
                         return DropdownMenuItem<String>(
                             value: leaveName,
-                            child: Text(leaveName)
+                            child: Text(leaveName,style: TextStyle(fontFamily: AppFonts.regular),)
                         );
                       }).toList(),
                     ),
@@ -156,7 +156,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                 Container(
                     margin: const EdgeInsets.only(right: 20),
                     padding: const EdgeInsets.only(left: 25),
-                    child: const Text('Search Panel',style: TextStyle(fontSize: 18,fontFamily: AppFonts.Medium),)),
+                    child: const Text('Search Panel',style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium),)),
                 Container(
                     margin: const EdgeInsets.only(right: 20),
                     child: TextButton(onPressed: (){
@@ -169,7 +169,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                             .doc(FirebaseAuth.instance.currentUser!.email).collection('InOutTime').
                         where('yearMonth',isEqualTo: '${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth} ${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear}').snapshots();
                       });
-                    }, child: const Text('Go',style: TextStyle(fontFamily: AppFonts.Medium),))),
+                    }, child: const Text('Go',style: TextStyle(fontFamily: AppFonts.medium),))),
               ],
             ),
             const SizedBox(height: 10,),
@@ -182,14 +182,14 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                   if(snapshot.connectionState == ConnectionState.waiting){
                     return const Center(child: CircularProgressIndicator());
                   }else if (snapshot.hasError) {
-                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.Medium)));
+                    return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium)));
                   }
                   else if (!snapshot.hasData) {
                     return  const Center(
-                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   } else if (snapshot.requireData.docChanges.isEmpty){
                     return  const Center(
-                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.Medium),));
+                        child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium),));
                   } else{
                     return ListView.builder(
                         itemCount: snapshot.data!.docs.length,
@@ -210,27 +210,27 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                                   const EdgeInsets.symmetric(vertical: 0, horizontal: 70),
                                   expandedCrossAxisAlignment: CrossAxisAlignment.end,
                                   maintainState: true,
-                                  title: Text('${snapshot.data?.docs[index]['currentDate']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.Medium)),
+                                  title: Text('${snapshot.data?.docs[index]['currentDate']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.medium)),
                                     children: [
                                       Row(
                                         children: [
-                                          const Text('In Time',style: TextStyle(fontFamily: AppFonts.Medium),),
+                                          const Text('In Time',style: TextStyle(fontFamily: AppFonts.medium),),
                                           const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['inTime']}',style: const TextStyle(fontFamily: AppFonts.Medium)),
+                                          Text('${snapshot.data?.docs[index]['inTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
                                         ],
                                       ),
                                       Row(
                                         children: [
-                                          const Text('Out Time',style: TextStyle(fontFamily: AppFonts.Medium)),
+                                          const Text('Out Time',style: TextStyle(fontFamily: AppFonts.medium)),
                                           const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['outTime']}',style: const TextStyle(fontFamily: AppFonts.Medium)),
+                                          Text('${snapshot.data?.docs[index]['outTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
                                         ],
                                       ),
                                       Row(
                                         children: [
-                                          const Text('Duration',style: TextStyle(fontFamily: AppFonts.Medium)),
+                                          const Text('Duration',style: TextStyle(fontFamily: AppFonts.medium)),
                                           const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['duration']}',style: const TextStyle(fontFamily: AppFonts.Medium)),
+                                          Text('${snapshot.data?.docs[index]['duration']}',style: const TextStyle(fontFamily: AppFonts.medium)),
                                         ],
                                       ),
                                     ],

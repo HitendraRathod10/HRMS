@@ -98,13 +98,13 @@ class _LoginScreenEmployeeState extends State<LoginScreenEmployee> {
                   const Text(
                     "Login",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24,fontFamily: AppFonts.Medium),
+                    style: TextStyle(fontSize: 24,fontFamily: AppFonts.medium),
                   ),
                   const SizedBox(height: 10),
                   const Text(
                     'Please sign in to continue',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontFamily: AppFonts.Light),
+                    style: TextStyle(fontFamily: AppFonts.medium),
                   ),
                   const SizedBox(height: 40),
                   TextFieldMixin().textFieldCardWidget(
@@ -157,7 +157,7 @@ class _LoginScreenEmployeeState extends State<LoginScreenEmployee> {
                       onTap: (){
                         Get.to(ResetPasswordScreen());
                       },
-                      child: const Text('Reset Password',style: TextStyle(fontFamily: AppFonts.Light),)),
+                      child: const Text('Reset Password',style: TextStyle(fontFamily: AppFonts.medium),)),
                   const SizedBox(height: 30),
 
                   Align(

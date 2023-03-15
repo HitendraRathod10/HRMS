@@ -53,7 +53,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Employee In Out'),
+        title: const Text('Employee In Out',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: SingleChildScrollView(
           child: Consumer<EmployeeInOutProvider>(builder: (_, snapshot, __) {
@@ -65,7 +65,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                 const Center(
                   child: Text('Manual In Out',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18,fontFamily: AppFonts.Medium)),
+                      style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium)),
                 ),
                 const SizedBox(height: 10),
                 StreamBuilder(
@@ -169,7 +169,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                   child: Center(
                     child: Text('Employee In Out List',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18,fontFamily: AppFonts.Medium)),
+                        style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium)),
                   ),
                 ),
                 StreamBuilder(
@@ -200,7 +200,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                           children: [
                                             Expanded(
                                                 child: Text('${streamSnapshot.data?.docs[index]['currentDate']}',
-                                                    style: const TextStyle(fontSize: 16,fontFamily: AppFonts.Medium)
+                                                    style: const TextStyle(fontSize: 16,fontFamily: AppFonts.medium)
                                                 )),
                                           ],
                                         ),
@@ -211,18 +211,18 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                           children: [
                                             const Expanded(
                                                 flex: 1,
-                                                child: Text('In Time', style: TextStyle(fontFamily: AppFonts.Medium))),
+                                                child: Text('In Time', style: TextStyle(fontFamily: AppFonts.medium))),
                                             Expanded(flex: 1,
-                                                child: Text(streamSnapshot.data?.docs[index]['inTime'],style: const TextStyle(fontFamily: AppFonts.Medium))),
+                                                child: Text(streamSnapshot.data?.docs[index]['inTime'],style: const TextStyle(fontFamily: AppFonts.medium))),
                                             const Expanded(
                                               //flex: 1,
                                                 child: Center(
-                                                    child: Text('Out Time', style: TextStyle(fontFamily: AppFonts.Medium),))),
+                                                    child: Text('Out Time', style: TextStyle(fontFamily: AppFonts.medium),))),
                                             Expanded(
                                                 child: Center(
                                                     child: Text(
                                                         streamSnapshot.data
-                                                            ?.docs[index]['outTime'] ?? '',style: const TextStyle(fontFamily: AppFonts.Medium)))),
+                                                            ?.docs[index]['outTime'] ?? '',style: const TextStyle(fontFamily: AppFonts.medium)))),
                                           ],
                                         ),
                                         const SizedBox(height: 5),
@@ -233,13 +233,13 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                             const Expanded(
                                                 flex: 5,
                                                 child: Text(
-                                                  'Duration', style: TextStyle(fontFamily: AppFonts.Medium),
+                                                  'Duration', style: TextStyle(fontFamily: AppFonts.medium),
                                                 )),
                                             Expanded(
                                                 flex: 1,
                                                 child: Text(
                                                   streamSnapshot.data?.docs[index]['duration'] ?? ''
-                                                ,style: const TextStyle(fontFamily: AppFonts.Medium))),
+                                                ,style: const TextStyle(fontFamily: AppFonts.medium))),
                                           ],
                                         ),
                                       ],

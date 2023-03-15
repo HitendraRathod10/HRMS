@@ -3,6 +3,7 @@ import 'package:employee_attendance_app/employee/profile/employee_profile_screen
 import 'package:employee_attendance_app/firebase/firebase_collection.dart';
 import 'package:employee_attendance_app/mixin/button_mixin.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
+import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,17 @@ class EmployeeProfile extends StatefulWidget {
 
 class _EmployeeProfileState extends State<EmployeeProfile> {
 
+  String capitalizeAllWord(String value) {
+    var result = value[0].toUpperCase();
+    for (int i = 1; i < value.length; i++) {
+      if (value[i - 1] == " ") {
+        result = result + value[i].toUpperCase();
+      } else {
+        result = result + value[i];
+      }
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +42,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
                 debugPrint('Something went wrong');
-                return const Text("Something went wrong");
+                return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
                 debugPrint('Document does not exist');
@@ -43,8 +55,19 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                         children: [
                           Container(
                             height: MediaQuery.of(context).size.height/3,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(60),bottomLeft: Radius.circular(60)),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColor.appColor.withOpacity(0.9),
+                                  AppColor.appColor.withOpacity(0.4),
+                                ],
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                  bottomRight: Radius.circular(60),
+                                  bottomLeft: Radius.circular(60)
+                              ),
                               color: AppColor.appColor,
                             ),
                           ),
@@ -62,7 +85,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                         color: AppColor.appColor,
                                         height: 80,width: 80,child: Center(
                                         child: Text('${data['employeeName']?.substring(0,1).toUpperCase()}',
-                                            style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30)),
+                                            style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.medium)),
                                       ),) :
                                       Image.network(
                                           '${data['imageUrl']}',
@@ -70,11 +93,11 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                                           width: 100,
                                           fit: BoxFit.fill)
                                   ),
-
-                                  Text(data['employeeName'],
-                                      style: const TextStyle(fontSize: 24,color: AppColor.whiteColor)),
+                                  const SizedBox(height: 30,),
+                                  Text(capitalizeAllWord(data['employeeName']),
+                                      style: const TextStyle(fontSize: 35,color: AppColor.whiteColor,fontFamily: AppFonts.medium)),
                                   Text(data['department'],
-                                      style: const TextStyle(fontSize: 12,color: Colors.white)),
+                                      style: const TextStyle(fontSize: 20,color: Colors.white,fontFamily: AppFonts.medium)),
                                   const SizedBox(height: 5),
                                 ],
                               ),
@@ -113,7 +136,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['employeeName'])),
+                                child: Text(data['employeeName'],style: TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -133,7 +156,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['email'])),
+                                child: Text(data['email'],style: TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -153,7 +176,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['mobile'])),
+                                child: Text(data['mobile'],style: TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -173,7 +196,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['dob'])),
+                                child: Text(data['dob'],style: TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -193,7 +216,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['address'])),
+                                child: Text(data['address'],style: TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),

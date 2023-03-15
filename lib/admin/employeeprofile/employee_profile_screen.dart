@@ -44,7 +44,7 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Employee Information'),
+        title: const Text('Employee Information',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: Form(
         key: formKey,
@@ -53,7 +53,7 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
                 print('Something went wrong');
-                return const Center(child: Text("Something went wrong"));
+                return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),));
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
                 return const Center(child: CircularProgressIndicator());
@@ -70,7 +70,7 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
                           color: AppColor.appColor,
                           height: 80,width: 80,child: Center(
                           child: Text('${data['employeeName']?.substring(0,1).toUpperCase()}',
-                              style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.Medium)),
+                              style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.medium)),
                         ),) :
                         Image.network(
                             '${data['imageUrl']}',

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/firebase/firebase_collection.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
+import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -104,7 +105,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text('Edit Profile',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -115,7 +116,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
               builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
                 if (snapshot.hasError) {
                   print('Something went wrong');
-                  return const Text("Something went wrong");
+                  return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
                 }
                 else if (!snapshot.hasData || !snapshot.data!.exists) {
                   print('Document does not exist');
@@ -138,7 +139,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                                 color: AppColor.appColor,
                                 height: 80,width: 80,child: Center(
                                 child: Text('${data['employeeName']?.substring(0,1).toUpperCase()}',
-                                  style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30)),
+                                  style: const TextStyle(color: AppColor.appBlackColor,fontSize: 30,fontFamily: AppFonts.regular)),
                               ),) :
                               Image.network(
                                   '${data['imageUrl']}',
