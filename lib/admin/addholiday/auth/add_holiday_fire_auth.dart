@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../firebase/firebase_collection.dart';
@@ -19,12 +20,12 @@ class AddHolidayFireAuth{
       "holidayName": holidayName.toString(),
       "holidayDescription": holidayDescription.toString()
     };
-    print('Holiday data=> $data');
+    debugPrint('Holiday data=> $data');
 
     FirebaseCollection().holidayCollection.get().then((querySnapshot) {
-      for (var result in querySnapshot.docs) {
-        print(result.data());
-      }
+      // for (var result in querySnapshot.docs) {
+      //   // print(result.data());
+      // }
     });
     await documentReferencer
         .set(data)

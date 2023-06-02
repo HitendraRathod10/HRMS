@@ -22,4 +22,7 @@ class AppImage{
   static const joiningIcon="assets/images/joiningIcon.png";
   static const resetPassword="assets/images/reset_password.png";
   static const reports="assets/images/reports.png";
+  static const entryExitOnBoarding="assets/images/entryExit.png";
+  static const holidayOnBoarding="assets/images/holiday.png";
+  static const leaveOnBoarding="assets/images/leaveSecond.png";
 }

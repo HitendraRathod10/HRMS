@@ -4,7 +4,7 @@ import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/app_fonts.dart';
-
+//ignore: must_be_immutable
 class EmployeeDetailsScreen extends StatelessWidget {
    EmployeeDetailsScreen({Key? key}) : super(key: key);
 

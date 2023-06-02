@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/firebase/firebase_collection.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../provider/employee_in_out_provider.dart';
 
 class InOutFireAuth{
 
@@ -29,12 +25,12 @@ class InOutFireAuth{
       "duration": duration.toString(),
       "yearMonth": yearMonth,
     };
-    print('In Out Data=> $data');
+    debugPrint('In Out Data=> $data');
 
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Added In Out Data"))
-        .catchError((e) => print(e));
+        .whenComplete(() => debugPrint("Added In Out Data"))
+        .catchError((e) => debugPrint(e));
   }
 
 }

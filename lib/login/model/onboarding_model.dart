@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-class OnboardingInfo {
-  final imageAsset;
+class OnBoardingInfo {
+  dynamic imageAsset;
   final Color color;
-  final title;
-  final description;
+  dynamic title;
+  dynamic description;
 
-  OnboardingInfo(this.imageAsset, this.title, this.description,this.color);
+  OnBoardingInfo(this.imageAsset, this.title, this.description,this.color);
 }

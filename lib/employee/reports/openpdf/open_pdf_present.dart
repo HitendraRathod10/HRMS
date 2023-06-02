@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import 'download_pdf_file.dart';
-
+//ignore: must_be_immutable
 class OpenPdfInOutPresent extends StatefulWidget {
 
-  var linked;
+  dynamic linked;
 
   OpenPdfInOutPresent({Key? key,required this.linked}) : super(key: key);
 

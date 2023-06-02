@@ -1,17 +1,16 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/login/model/admin_model.dart';
-import 'package:employee_attendance_app/login/model/employeeModel.dart';
+// import 'package:employee_attendance_app/login/model/employeeModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import '../../admin/home/screen/admin_home_screen.dart';
-import '../../employee/home/screen/employee_home_screen.dart';
 import '../../utils/app_utils.dart';
 import '../../widget/admin_bottom_navigationbar.dart';
 import '../../widget/employee_bottom_navigationbar.dart';
+import '../model/employee_model.dart';
 import 'loading_provider.dart';
 
 class LoginProvider extends ChangeNotifier{
@@ -72,11 +71,11 @@ class LoginProvider extends ChangeNotifier{
       "mobile": mobile.toString(),
       "type": 'Admin',
     };
-    print('employee data=> $data');
+    debugPrint('employee data=> $data');
 
     FirebaseFirestore.instance.collection("admin").get().then((querySnapshot) {
       for (var result in querySnapshot.docs) {
-        print(result.data());
+        // debugPrint(result.data());
         adminData.add(result.data());
       }
     });
@@ -86,7 +85,7 @@ class LoginProvider extends ChangeNotifier{
       // EasyLoading.dismiss()
       Provider.of<LoadingProvider>(context,listen: false).stopLoading()
     })
-        .catchError((e) => print(e));
+        .catchError((e) => debugPrint(e));
   }
 
   getData(String email) {
@@ -103,19 +102,19 @@ class LoginProvider extends ChangeNotifier{
       //for (int i = 0; i < adminDataList.length; i++){
       //  print(adminDataList[i].email);
         if (FirebaseAuth.instance.currentUser!.email == email) {
-          print("login provider ${FirebaseAuth.instance.currentUser!.email}");
-          print("login provider ${FirebaseAuth.instance.currentUser!.displayName}");
-          print("login provider ${FirebaseAuth.instance.currentUser!}");
+          debugPrint("login provider ${FirebaseAuth.instance.currentUser!.email}");
+          debugPrint("login provider ${FirebaseAuth.instance.currentUser!.displayName}");
+          debugPrint("login provider ${FirebaseAuth.instance.currentUser!}");
           if (FirebaseAuth.instance.currentUser!.displayName == 'Admin' || FirebaseAuth.instance.currentUser!.displayName == "null" || FirebaseAuth.instance.currentUser!.displayName == null) {
-            Get.offAll(AdminBottomNavBarScreen());
+            Get.offAll(const AdminBottomNavBarScreen());
             AppUtils.instance.showToast(toastMessage: "Login Successfully for Admin");
-            print('Admin login');
+            debugPrint('Admin login');
             notifyListeners();
           }
           else {
-            Get.offAll(BottomNavBarScreen());
+            Get.offAll(const BottomNavBarScreen());
             AppUtils.instance.showToast(toastMessage: "Login Successfully for Employee");
-            print('Employee login');
+            debugPrint('Employee login');
             notifyListeners();
           }
       //  }

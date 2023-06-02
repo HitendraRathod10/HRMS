@@ -1,19 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/employee/home/widget/dashboard_details_widget.dart';
-import 'package:employee_attendance_app/employee/leave/leaveStatusApplied.dart';
 import 'package:employee_attendance_app/employee/reports/employee_reports_screen.dart';
 import 'package:employee_attendance_app/firebase/firebase_collection.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
-import 'package:employee_attendance_app/utils/app_images.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pdf/widgets.dart' as widget;
 import '../../attendance_details/attendance_details_screen.dart';
 import '../../inOut/screen/employee_in_out_screen.dart';
 import '../../leave/leave_screen.dart';
+import '../../leave/leave_status_applied.dart';
 import '../../publicholiday/screen/public_holiday_screen.dart';
 
 class EmployeeHomeScreen extends StatefulWidget {
@@ -116,7 +114,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                       Text('Hi, ${capitalizeAllWord(data['employeeName'])}',style: TextStyle(fontFamily: AppFonts.medium,color: AppColor.backgroundColor),),
+                                       Text('Hi, ${capitalizeAllWord(data['employeeName'])}',style: const TextStyle(fontFamily: AppFonts.medium,color: AppColor.backgroundColor),),
                                       const SizedBox(height: 3),
                                       Text(hour < 12 ? 'Good Morning' :
                                       hour < 17 ? 'Good Afternoon' : 'Good Evening',style: const TextStyle(fontFamily: AppFonts.bold,fontSize: 24,color: AppColor.whiteColor)),
@@ -287,7 +285,7 @@ class _EmployeeHomeScreenState extends State<EmployeeHomeScreen> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            Get.to(LeaveScreen(),
+                            Get.to(const LeaveScreen(),
                                 transition: Transition.rightToLeftWithFade);
                           },
                           child: dashboardDetailsWidget('https://cdn-icons-png.flaticon.com/512/3387/3387310.png', 'Apply Leave','Applying for a leave',AppColor.appColor.withOpacity(0.4)),

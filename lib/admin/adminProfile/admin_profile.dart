@@ -42,11 +42,11 @@ class _AdminProfileState extends State<AdminProfile> {
             stream: FirebaseCollection().adminCollection.doc(FirebaseAuth.instance.currentUser?.email).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong');
+                debugPrint('Something went wrong');
                 return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
-                print('Document does not exist');
+                debugPrint('Document does not exist');
                 return const Center(child: CircularProgressIndicator());
               } else if(snapshot.requireData.exists){
                 Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -91,7 +91,7 @@ class _AdminProfileState extends State<AdminProfile> {
                                   ),
                                   const SizedBox(height: 30,),
                                   Text(capitalizeAllWord(data['companyName'].toString()),
-                                      style: TextStyle(fontSize: 35,color: AppColor.whiteColor,fontFamily: AppFonts.medium)),
+                                      style: const TextStyle(fontSize: 35,color: AppColor.whiteColor,fontFamily: AppFonts.medium)),
                                 ],
                               ),
                             ),
@@ -115,8 +115,8 @@ class _AdminProfileState extends State<AdminProfile> {
                         ]
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 20),
-                      margin: EdgeInsets.only(left: 20,right: 20),
+                      padding: const EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(left: 20,right: 20),
                       width: double.infinity,
                       child: Card(
                         child: Row(
@@ -129,14 +129,14 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['companyName'],style: TextStyle(fontFamily: AppFonts.regular),)),
+                                child: Text(data['companyName'],style: const TextStyle(fontFamily: AppFonts.regular),)),
                           ],
                         ),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 5),
-                      margin: EdgeInsets.only(left: 20,right: 20),
+                      padding: const EdgeInsets.only(top: 5),
+                      margin: const EdgeInsets.only(left: 20,right: 20),
                       width: double.infinity,
                       child: Card(
                         child: Row(
@@ -149,7 +149,7 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['email'],style: TextStyle(fontFamily: AppFonts.regular))),
+                                child: Text(data['email'],style: const TextStyle(fontFamily: AppFonts.regular))),
                           ],
                         ),
                       ),
@@ -169,7 +169,7 @@ class _AdminProfileState extends State<AdminProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['mobile'],style: TextStyle(fontFamily: AppFonts.regular))),
+                                child: Text(data['mobile'],style: const TextStyle(fontFamily: AppFonts.regular))),
                           ],
                         ),
                       ),
@@ -201,6 +201,6 @@ class _AdminProfileState extends State<AdminProfile> {
 }
 extension StringExtension on String {
   String capitalizeText() {
-    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }

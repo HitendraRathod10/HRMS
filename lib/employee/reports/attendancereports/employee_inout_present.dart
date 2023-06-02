@@ -169,12 +169,12 @@ class _EmployeeInOutPresentState extends State<EmployeeInOutPresent> {
                                 children: [
                                   TextButton(
                                       style: TextButton.styleFrom(
-                                        primary: Colors.white,
+                                        foregroundColor: Colors.white,
                                         backgroundColor:
                                             AppColor.appColor, //// Text Color
                                       ),
                                       onPressed: () async {
-                                        print(presentSnapshot.data!.docs.length
+                                        debugPrint(presentSnapshot.data!.docs.length
                                             .toString());
                                         //Get.to(
                                          /* PdfViewInOutPresent(
@@ -217,7 +217,7 @@ class _EmployeeInOutPresentState extends State<EmployeeInOutPresent> {
                                         Navigator.of(context).pop();
                                       },
                                       style: TextButton.styleFrom(
-                                        primary: Colors.white,
+                                        foregroundColor: Colors.white,
                                         backgroundColor:
                                             AppColor.appColor, //// Text Color
                                       ),

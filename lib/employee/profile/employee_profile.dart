@@ -136,7 +136,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['employeeName'],style: TextStyle(fontFamily: AppFonts.medium),)),
+                                child: Text(data['employeeName'],style: const TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -156,7 +156,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['email'],style: TextStyle(fontFamily: AppFonts.medium),)),
+                                child: Text(data['email'],style: const TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -176,7 +176,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['mobile'],style: TextStyle(fontFamily: AppFonts.medium),)),
+                                child: Text(data['mobile'],style: const TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -196,7 +196,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['dob'],style: TextStyle(fontFamily: AppFonts.medium),)),
+                                child: Text(data['dob'],style: const TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),
@@ -216,7 +216,7 @@ class _EmployeeProfileState extends State<EmployeeProfile> {
                             Container(
                                 padding: const EdgeInsets.only(top: 10,bottom: 10),
                                 margin: const EdgeInsets.only(left: 10,right: 10),
-                                child: Text(data['address'],style: TextStyle(fontFamily: AppFonts.medium),)),
+                                child: Text(data['address'],style: const TextStyle(fontFamily: AppFonts.medium),)),
                           ],
                         ),
                       ),

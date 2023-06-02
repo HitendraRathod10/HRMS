@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../mixin/button_mixin.dart';
 import '../../utils/app_colors.dart';
-
+//ignore: must_be_immutable
 class ResetPasswordScreen extends StatelessWidget {
    ResetPasswordScreen({Key? key}) : super(key: key);
 

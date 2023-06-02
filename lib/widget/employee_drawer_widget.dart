@@ -66,7 +66,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
               }
             ),
           ),
-          Divider(height: 1,color: AppColor.darkGreyColor,),
+          const Divider(height: 1,color: AppColor.darkGreyColor,),
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home',style: TextStyle(fontFamily: AppFonts.medium)),

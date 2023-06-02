@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../login/auth/login_employee_fire_auth.dart';
@@ -76,7 +75,7 @@ class _AddEmployeeState extends State<AddEmployee> {
       UploadTask uploadsTask =  ref.putFile(file!);
       final snapshot = await uploadsTask.whenComplete(() {});
       final imageUrl = await snapshot.ref.getDownloadURL().whenComplete(() {});
-
+      if (!mounted) return;
       User? user = await AddEmployeeFireAuth.registerEmployeeUsingEmailPassword(
           employeeName: employeeNameController.text,
           emailID: emailController.text,
@@ -94,22 +93,23 @@ class _AddEmployeeState extends State<AddEmployee> {
             imageUrl: imageUrl,
             employmentType: employmentTypeController.text, exprience: exprienceGradeController.text,
             manager: managerController.text, type: 'Employee').then((value) {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>AdminBottomNavBarScreen()), (route) => false);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const AdminBottomNavBarScreen()), (route) => false);
           // Get.off(AdminBottomNavBarScreen());
           send();
         });
         //FirebaseAuth.instance.signOut();
+        if (!mounted) return;
         Provider.of<LoadingProvider>(context,listen: false).stopLoading();
       }
       debugPrint("Image URL = $imageUrl");
     } catch (e) {
-      print('Failed to upload image');
+      debugPrint('Failed to upload image');
     }
   }
 
 
   Future<void> send() async {
-    print("send mail on this id :- ${emailController.text}");
+    debugPrint("send mail on this id :- ${emailController.text}");
     final Email email = Email(
       body: 'Please find the HRMS credentials below,\n\n To Start HRMS,\n Login ID-${emailController.text} \n Password- ${passwordController.text}',
       subject: 'HRMS Credentials..!!',
@@ -117,9 +117,9 @@ class _AddEmployeeState extends State<AddEmployee> {
     );
     try {
       await FlutterEmailSender.send(email);
-      print("send method run successfully !!");
+      debugPrint("send method run successfully !!");
     } catch (error) {
-      print("send method $error");
+      debugPrint("send method $error");
     }
 
   }
@@ -350,12 +350,12 @@ class _AddEmployeeState extends State<AddEmployee> {
                       keyboardType: TextInputType.number,
                       prefixIcon:
                       const Icon(Icons.timeline_sharp, color: AppColor.appColor),
-                      labelText: 'Exprience',
+                      labelText: 'Experience',
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter exprience year';
+                          return 'Please enter experience year';
                         }
                         return null;
                       },

@@ -26,7 +26,7 @@ class ButtonMixin {
     );
 
     return Container(
-      padding: EdgeInsets.only(left: 30,right: 30,top: 15,bottom: 15),
+      padding: const EdgeInsets.only(left: 30,right: 30,top: 15,bottom: 15),
       decoration:boxDecoration,
       child: Padding(
         padding: const EdgeInsets.only(left: 10.0,right: 10),

@@ -98,7 +98,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextFormField(
                     cursorColor:  AppColor.appColor,
-                    style: const TextStyle(fontFamily: AppFonts.Medium),
+                    style: const TextStyle(fontFamily: AppFonts.medium),
                     keyboardType: TextInputType.multiline,
                     controller: holidayNameController,
                     textInputAction: TextInputAction.done,
@@ -125,7 +125,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                     child: TextFormField(
                       cursorColor:  AppColor.appColor,
                       maxLines: null,
-                      style: const TextStyle(fontFamily: AppFonts.Medium,fontSize: 14),
+                      style: const TextStyle(fontFamily: AppFonts.medium,fontSize: 14),
                       keyboardType: TextInputType.multiline,
                       controller: descriptionController,
                       textInputAction: TextInputAction.done,

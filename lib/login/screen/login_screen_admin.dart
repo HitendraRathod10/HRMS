@@ -111,7 +111,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                     controller: emailController,
                     prefixIcon: const Icon(Icons.email, color: AppColor.appColor),
                     labelText: 'Email',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       
                     ),
                     validator: (value) {
@@ -177,6 +177,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                           if (user != null) {
                             AppUtils.instance.setPref(PreferenceKey.boolKey, PreferenceKey.prefLogin, true);
                             AppUtils.instance.setPref(PreferenceKey.stringKey, PreferenceKey.prefEmail, emailController.text);
+                            if (!mounted) return;
                             Provider.of<LoginProvider>(context,listen: false).getSharedPreferenceData(emailController.text);
                             if (_formKey.currentState!.validate()) {
                               Provider.of<LoginProvider>(context,listen: false).getData(emailController.text);

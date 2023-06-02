@@ -44,7 +44,7 @@ class AdminDrawerScreen extends StatelessWidget {
                                 height: 70,width: 70,
                                 child: Center(
                                   child: Text('${data['companyName']?.substring(0,1).toUpperCase()}',
-                                    style: const TextStyle(color: AppColor.whiteColor,fontSize: 30,fontFamily: AppFonts.Regular)),
+                                    style: const TextStyle(color: AppColor.whiteColor,fontSize: 30,fontFamily: AppFonts.regular)),
                                 ))
                         ),
                         Column(
@@ -52,9 +52,9 @@ class AdminDrawerScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
                             const SizedBox(height: 10),
-                            Text('${data['companyName']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.Medium,color: AppColor.blackColor)),
+                            Text('${data['companyName']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.medium,color: AppColor.blackColor)),
                             const SizedBox(height:3),
-                            Text('${FirebaseAuth.instance.currentUser?.email}',style: const TextStyle(color: AppColor.blackColor,fontFamily: AppFonts.Regular),),
+                            Text('${FirebaseAuth.instance.currentUser?.email}',style: const TextStyle(color: AppColor.blackColor,fontFamily: AppFonts.regular),),
                           ],
                         ),
                       ],
@@ -66,17 +66,17 @@ class AdminDrawerScreen extends StatelessWidget {
               }
             ),
           ),
-          Divider(height: 1,color: AppColor.darkGreyColor,),
+          const Divider(height: 1,color: AppColor.darkGreyColor,),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('Home',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Home',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
               Get.back();
             },
           ),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('Profile',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Profile',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
               Navigator.pop(context);
               Get.to(const AdminProfileScreen(),
@@ -105,7 +105,7 @@ class AdminDrawerScreen extends StatelessWidget {
 */
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Logout',style: TextStyle(fontFamily: AppFonts.Medium)),
+            title: const Text('Logout',style: TextStyle(fontFamily: AppFonts.medium)),
             onTap: () {
               FirebaseAuth.instance.signOut();
               AppUtils.instance.clearPref().then((value) => Get.offAll(LoginScreen()));

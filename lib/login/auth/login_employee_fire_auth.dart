@@ -49,7 +49,7 @@ class AddEmployeeFireAuth {
     required String employeeName,
     required String emailID,
     required String password,
-    required BuildContext context
+    required BuildContext? context
 
   }) async {
     FirebaseApp app = await Firebase.initializeApp(
@@ -71,24 +71,25 @@ class AddEmployeeFireAuth {
       user = auth.currentUser;
       // app.delete();
       // user = userCredential.user;
-      print("add emp $employeeName");
+      debugPrint("add emp $employeeName");
       // await user!.updateDisplayName(employeeName);
-      print("add emp ${user!.displayName}");
-      print("add emp $user");
+      debugPrint("add emp ${user!.displayName}");
+      debugPrint("add emp $user");
       // await user.reload();
       // user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        Provider.of<LoadingProvider>(context,listen: false).stopLoading();
+        debugPrint('The password provided is too weak.');
+
+        Provider.of<LoadingProvider>(context!,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: "The password provided is too weak.");
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        Provider.of<LoadingProvider>(context,listen: false).stopLoading();
+        debugPrint('The account already exists for that email.');
+        Provider.of<LoadingProvider>(context!,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: "The account already exists for that email.");
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return user;
   }
@@ -108,10 +109,10 @@ class AddEmployeeFireAuth {
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        debugPrint('No user found for that email.');
         AppUtils.instance.showToast(toastMessage: 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+        debugPrint('Wrong password provided.');
         AppUtils.instance.showToast(toastMessage: 'Wrong password provided.');
       }
     }
@@ -152,18 +153,18 @@ class AddEmployeeFireAuth {
       "manager": manager.toString(),
       "type": 'Employee'
     };
-    print('employee data=> $data');
+    debugPrint('employee data=> $data');
 
     FirebaseCollection().employeeCollection.get().then((querySnapshot) {
       for (var result in querySnapshot.docs) {
-        print(result.data());
+        // debugPrint(result.data());
         employeeData.add(result.data());
       }
     });
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Added Employee Details"))
-        .catchError((e) => print(e));
+        .whenComplete(() => debugPrint("Added Employee Details"))
+        .catchError((e) => debugPrint(e.toString()));
   }
 
 }

@@ -14,7 +14,7 @@ class OnBoardingScreen extends StatefulWidget{
 
 class _OnBoardingScreenState extends State<OnBoardingScreen>{
 
-  final _controller = OnboardingController();
+  final _controller = OnBoardingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>{
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network(
+                        Image.asset(
                             _controller.onboardingPages[index].imageAsset,height: 200),
                         const SizedBox(height: 80),
                         Text(

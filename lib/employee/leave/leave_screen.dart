@@ -16,7 +16,7 @@ import '../../utils/app_colors.dart';
 import '../../widget/employee_bottom_navigationbar.dart';
 
 class LeaveScreen extends StatefulWidget {
-  LeaveScreen({Key? key}) : super(key: key);
+  const LeaveScreen({Key? key}) : super(key: key);
 
   @override
   State<LeaveScreen> createState() => _LeaveScreenState();
@@ -45,6 +45,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
         firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     //notifyListeners();
+    if (!mounted) return;
     if (pickedFrom != null && pickedFrom != Provider.of<LeaveProvider>(context,listen: false).leaveFromDate) {
       Provider.of<LeaveProvider>(context, listen: false).leaveFromDate = pickedFrom!;
       Provider.of<LeaveProvider>(context, listen: false).countValueGet();
@@ -61,6 +62,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
         firstDate: pickedFrom ?? DateTime.now(),
         lastDate: DateTime(2101),
     );
+    if (!mounted) return;
     if (pickedTo != null && pickedTo != Provider.of<LeaveProvider>(context,listen: false).leaveToDate) {
       Provider.of<LeaveProvider>(context,listen: false).leaveToDate = pickedTo!;
       Provider.of<LeaveProvider>(context,listen: false).countValueGet();
@@ -169,6 +171,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                 if (value == null) {
                                   return 'Leave type is required';
                                 }
+                                return null;
                               },
                               hint: const Text('Select Leave Type',style: TextStyle(fontFamily: AppFonts.medium)),
                               isExpanded: true,
@@ -225,7 +228,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                             onTap : () {
                               selectFromDate(context);
                               // pickedTo = null;
-                              print(snapshot.countLeave);
+                              debugPrint(snapshot.countLeave.toString());
                             },
                             child: Container(
                               width: double.infinity,
@@ -270,9 +273,9 @@ class _LeaveScreenState extends State<LeaveScreen> {
                             onTap : () {
                               selectToDate(context);
                               snapshot.getFromLeave();
-                              print(snapshot.countLeave);
-                              print(pickedFrom);
-                              print(snapshot.leaveFromDate);
+                              debugPrint(snapshot.countLeave.toString());
+                              debugPrint(pickedFrom.toString());
+                              debugPrint(snapshot.leaveFromDate.toString());
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -468,10 +471,10 @@ class _LeaveScreenState extends State<LeaveScreen> {
                               timeBlock: 60,
                               onRangeCompleted: (range) {
                                 setState((){
-                                  print(range?.start);
-                                  print(range?.end);
-                                  print(range!.end.hour-range.start.hour);
-                                  snapshot.countHour = range.end.hour-range.start.hour;
+                                  // debugPrint(range?.start.toString());
+                                  // debugPrint(range?.end.toString());
+                                  // debugPrint(range!.end.hour-range.start.hour);
+                                  snapshot.countHour = range!.end.hour-range.start.hour;
                                   snapshot.fromTime = range.start.toString();
                                   snapshot.toTime = range.end.toString();
                                 });
@@ -581,7 +584,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                       leaveEmployeeName: '${data['employeeName']?.toString().capitalizeFirst}');
                                   leaveTypeController.clear();
                                   reasonController.clear();
-                                  Get.to(BottomNavBarScreen());
+                                  Get.to(const BottomNavBarScreen());
                                 }
                               },
                               child: ButtonMixin()

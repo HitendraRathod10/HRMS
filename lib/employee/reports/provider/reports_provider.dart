@@ -9,7 +9,7 @@ class ReportsProvider extends ChangeNotifier{
 
   DateTime? pickedFrom,pickedTo;
   DateTime now = DateTime.now();
-  var pdf;
+  // var pdf;
 
   Future<void> selectFromDate(BuildContext context) async {
     pickedFrom = await showDatePicker(

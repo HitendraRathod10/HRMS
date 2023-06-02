@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +17,7 @@ class AppUtils{
         gravity: ToastGravity.BOTTOM);
   }
 
-  showSnackBar(GlobalKey<ScaffoldState>? _scaffoldKey, BuildContext? context,
+  showSnackBar(GlobalKey<ScaffoldState>? scaffoldKey, BuildContext? context,
       String msg, {Color? color, int? duration}) {
     return ScaffoldMessenger.of(context!).showSnackBar(
       SnackBar(

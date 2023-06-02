@@ -55,25 +55,30 @@ class MyApp extends StatelessWidget {
               style: ButtonStyle(
                   backgroundColor:
                   MaterialStateProperty.all<Color>(AppColor.whiteColor))),
-          accentColor: AppColor.appColor,
-          appBarTheme: const AppBarTheme(
+          appBarTheme:  AppBarTheme(
             color: AppColor.whiteColor,
             elevation: 0.0,
             centerTitle: true,
-            textTheme:  TextTheme(
-              headline6:  TextStyle(
-                  color: AppColor.appColor,
-                  fontSize: 14,),
-            ),
-            titleTextStyle:  TextStyle(
+            titleTextStyle:  const TextStyle(
               color: AppColor.appColor,
               fontSize: 16,
-              fontFamily: AppFonts.Medium,
+              fontFamily: AppFonts.medium,
             ),
-            iconTheme:  IconThemeData(
+            iconTheme:  const IconThemeData(
               color: AppColor.blackColor,
             ),
+            toolbarTextStyle: const TextTheme(
+              titleLarge:  TextStyle(
+                  color: AppColor.appColor,
+                  fontSize: 14,),
+            ).bodyMedium,
+            // titleTextStyle: TextTheme(
+            //   headline6:  TextStyle(
+            //       color: AppColor.appColor,
+            //       fontSize: 14,),
+            // ).headline6,
           ),
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColor.appColor).copyWith(secondary: AppColor.appColor),
         ),
         home: const SplashScreen(),
         debugShowCheckedModeBanner: false,

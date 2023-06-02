@@ -16,11 +16,11 @@ class PdfViewInOutSummary extends ChangeNotifier{
     OpenFile.open('$path/$fileName');
   }
 */
-  Future<Uint8List> makePdfInOutSummary(fromDate,toDate,BuildContext buildContext) async {
+  Future<Uint8List> makePdfInOutSummary(fromDate,toDate,BuildContext? context) async {
     final pdf = pw.Document();
     var querySnapshots = await InOutFireAuth().mainCollection.get();
     var leaveCollection = await FirebaseCollection().leaveCollection.get();
-    var providerData = Provider.of<ReportsProvider>(buildContext,listen: false);
+    var providerData = Provider.of<ReportsProvider>(context!,listen: false);
     String? inTime,outTime,duration;
 
     //querySnapshots.docChanges.where((element) => element.doc.get('inTime'));
@@ -106,14 +106,14 @@ class PdfViewInOutSummary extends ChangeNotifier{
                                           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                                           children: [
                                             pw.Padding(
-                                              padding: pw.EdgeInsets.only(left: 12),
+                                              padding: const pw.EdgeInsets.only(left: 12),
                                               child: pw.Text('From'),
                                             ),
                                             pw.Container(
                                               height: 20,
                                               color: const PdfColor(0, 0, 0, 0), width: 1),
                                             pw.Padding(
-                                              padding: pw.EdgeInsets.only(right: 20),
+                                              padding: const pw.EdgeInsets.only(right: 20),
                                               child: pw.Text('To'),
                                             ),
                                           ]
@@ -184,12 +184,12 @@ class PdfViewInOutSummary extends ChangeNotifier{
                                               children: [
                                                 ...querySnapshots.docs.map((e){
                                                   inTime = e['inTime'];
-                                                  print('InTime => ${e["inTime"]}');
+                                                  debugPrint('InTime => ${e["inTime"]}');
                                                   return e['currentDate'] == "${providerData.reportsFromDate.year}""-${providerData.reportsFromDate.month
                                                       .toString().length != 1 ? providerData.reportsFromDate.month :
                                                   '0${providerData.reportsFromDate.month}'}"
                                                       "-${i.toString().length == 1 ? '0$i' : i}"
-                                                      ? inTime != '' ? pw.Text('${inTime}') : pw.Text('') : pw.Text('');
+                                                      ? inTime != '' ? pw.Text('$inTime') : pw.Text('') : pw.Text('');
                                                 },),
                                               ]
                                             ),
@@ -220,7 +220,7 @@ class PdfViewInOutSummary extends ChangeNotifier{
                                                 children: [
                                                   ...querySnapshots.docs.map((e){
                                                     outTime = e['outTime'];
-                                                    print('outTime => ${e["outTime"]}');
+                                                    debugPrint('outTime => ${e["outTime"]}');
                                                     return e['currentDate'] == "${providerData.reportsFromDate.year}""-${providerData.reportsFromDate.month
                                                         .toString().length != 1 ? providerData.reportsFromDate.month :
                                                     '0${providerData.reportsFromDate.month}'}"

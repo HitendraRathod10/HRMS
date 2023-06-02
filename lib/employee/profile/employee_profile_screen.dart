@@ -8,7 +8,6 @@ import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -63,7 +62,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
       return path;
     }
 
-    void _selectProfileImage(BuildContext context) async{
+    void selectProfileImage(BuildContext context) async{
       //Pick Image File
       FilePickerResult? result = await FilePicker.platform.pickFiles(
           allowMultiple: false,
@@ -88,7 +87,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
         final ref = FirebaseStorage.instance.ref().child(destination);
         await ref.putFile(file!);
         // var dowurl = await (await ref.putFile(file!).whenComplete(() => ref.getDownloadURL()));
-        print("Image Upload");
+        debugPrint("Image Upload");
 
         //  final ref1 =
         //  FirebaseStorage.instance.ref().child("images/${FirebaseAuth.instance.currentUser!.email}.jpg");
@@ -96,10 +95,10 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
         setState((){
           url = url1;
         });
-        print(url);
+        debugPrint(url);
 
       } catch (e) {
-        print('error occurred');
+        debugPrint('error occurred');
       }
     }
 
@@ -115,11 +114,11 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
               stream: FirebaseCollection().employeeCollection.doc(FirebaseAuth.instance.currentUser?.email).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
                 if (snapshot.hasError) {
-                  print('Something went wrong');
+                  debugPrint('Something went wrong');
                   return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
                 }
                 else if (!snapshot.hasData || !snapshot.data!.exists) {
-                  print('Document does not exist');
+                  debugPrint('Document does not exist');
                   return const Center(child: CircularProgressIndicator());
                 } else if(snapshot.requireData.exists){
                   Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -131,7 +130,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                         children : [
                         GestureDetector(
                           onTap: (){
-                            _selectProfileImage(context);
+                            selectProfileImage(context);
                           },
                           child: ClipOval(
                               child: file == null ?
@@ -157,7 +156,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                             top: 60,
                             child: ClipOval(child: Container(
                               height: 40,width: 40,
-                              color:AppColor.whiteColor,child: Icon(Icons.camera_alt,color: AppColor.appColor,),)),
+                              color:AppColor.whiteColor,child: const Icon(Icons.camera_alt,color: AppColor.appColor,),)),
                           )
                         ]
                       ),
@@ -176,15 +175,16 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                                 if(value!.isEmpty){
                                   return 'Name is Required';
                                 }
+                                return null;
                               },
                             ),
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             TextFieldMixin().textFieldProfileWidget(
                               labelText: 'Email',
                               controller: emailController..text = data['email'],
                               readOnly: true,
                             ),
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             TextFieldMixin().textFieldProfileWidget(
                               labelText: 'DOB',
                               controller: dobController..text = data['dob'],
@@ -281,13 +281,13 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                                           employmentType: employmentTypeController.text, exprience: exprienceGradeController.text,
                                           manager: managerController.text, type: 'Employee');
                                       //Navigator.push(context, MaterialPageRoute(builder: (context)=>EmployeeHomeScreen()));
-                                      Get.offAll(BottomNavBarScreen());
+                                      Get.offAll(const BottomNavBarScreen());
                                     });
                                     // } else{
-                                    //   print('Image Url is null = > $url');
+                                    //   debugPrint('Image Url is null = > $url');
                                   }
 
-                              //  print('Image Url = > $url');
+                              //  debugPrint('Image Url = > $url');
                                 },
                                 child: ButtonMixin()
                                     .stylishButton(onPress: () {}, text: 'Edit Profile'),

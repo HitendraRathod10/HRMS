@@ -10,7 +10,7 @@ class LeaveProvider extends ChangeNotifier{
   String? fromTime,toTime;
 
  // String selectLeaveType = "";
-  String? selectLeaveType = null;
+  String? selectLeaveType;
 
   List<String> selectLeaveTypeItem = [
     'LWP',

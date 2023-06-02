@@ -13,7 +13,7 @@ import '../../login/provider/loading_provider.dart';
 import '../../mixin/button_mixin.dart';
 import '../../utils/app_utils.dart';
 import '../../widget/admin_bottom_navigationbar.dart';
-
+//ignore: must_be_immutable
 class ViewAdminEmployeeProfileScreen extends StatefulWidget with TextFieldMixin {
 
   ViewAdminEmployeeProfileScreen({Key? key,required this.email}) : super(key: key);
@@ -52,7 +52,7 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
             stream: FirebaseCollection().employeeCollection.doc(widget.email).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong');
+                debugPrint('Something went wrong');
                 return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),));
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
@@ -303,7 +303,7 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
                                       employmentType: employmentTypeController.text,
                                       exprience: exprienceGradeController.text,
                                       manager: managerController.text, type: 'Employee');
-                                  Get.off(AdminBottomNavBarScreen());
+                                  Get.off(const AdminBottomNavBarScreen());
                                   Provider.of<LoadingProvider>(context,listen: false).stopLoading();
                             });
                                   //FirebaseAuth.instance.signOut();

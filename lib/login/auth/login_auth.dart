@@ -29,17 +29,17 @@ class LoginAuth {
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        debugPrint('The password provided is too weak.');
         Provider.of<LoadingProvider>(context,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: 'The password provided is too weak.');
       }
       else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        debugPrint('The account already exists for that email.');
         Provider.of<LoadingProvider>(context,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: "The account already exists for that email.");
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return user;
   }
@@ -59,15 +59,15 @@ class LoginAuth {
       );
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      print('dfgsdcdd => $e');
+      debugPrint('dfgsdcdd => $e');
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        print(e);
+        debugPrint('No user found for that email.');
+        debugPrint(e.toString());
         Provider.of<LoadingProvider>(context,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: 'No user found for that email.');
       }
       else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+        debugPrint('Wrong password provided.');
         Provider.of<LoadingProvider>(context,listen: false).stopLoading();
         AppUtils.instance.showToast(toastMessage: 'Wrong password provided.');
       }

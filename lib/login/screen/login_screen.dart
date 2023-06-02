@@ -1,21 +1,9 @@
-import 'package:employee_attendance_app/login/screen/admin_register_screen.dart';
-import 'package:employee_attendance_app/login/screen/login_screen_employee.dart';
 import 'package:employee_attendance_app/mixin/button_mixin.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import '../../mixin/textfield_mixin.dart';
-import '../../utils/app_preference_key.dart';
-import '../../utils/app_utils.dart';
-import '../auth/login_auth.dart';
-import '../provider/loading_provider.dart';
-import '../provider/login_provider.dart';
 import 'login_screen_admin.dart';
-import 'reset_password_screen.dart';
-
 
 class LoginScreen extends StatefulWidget with ButtonMixin,TextFieldMixin{
    LoginScreen({Key? key}) : super(key: key);

@@ -43,7 +43,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
             stream: FirebaseCollection().adminCollection.doc(FirebaseAuth.instance.currentUser?.email).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong');
+                debugPrint('Something went wrong');
                 return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.regular),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
@@ -66,6 +66,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                               if(value!.isEmpty){
                                 return 'Name is Required';
                               }
+                              return null;
                             },
                           ),
                           const SizedBox(height: 10),
@@ -91,7 +92,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                                     Provider.of<LoginProvider>(context,listen: false).signUpAdmin(email: emailController.text.trim(),
                                         companyName: companyNameController.text.trim(),
                                         mobile: mobileController.text.trim(),type: 'Admin');
-                                    Get.offAll(AdminBottomNavBarScreen());
+                                    Get.offAll(const AdminBottomNavBarScreen());
                                 }
                               },
                               child: ButtonMixin()

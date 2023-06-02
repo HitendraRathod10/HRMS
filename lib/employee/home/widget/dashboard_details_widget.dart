@@ -13,7 +13,7 @@ Widget dashboardDetailsWidget(
 
       child: Container(
         padding: const EdgeInsets.only(left: 5),
-        height: 150,
+        // height: 150,
         decoration:  BoxDecoration(
 
           borderRadius: const BorderRadius.only(topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
@@ -53,10 +53,12 @@ Widget dashboardDetailsWidget(
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 5),
-                  child: Text(description,
-                      style: const TextStyle(
-                          fontSize: 12, fontFamily: AppFonts.medium),
-                      textAlign: TextAlign.center),
+                  child: Expanded(
+                    child: Text(description,
+                        style: const TextStyle(
+                            fontSize: 12, fontFamily: AppFonts.medium),
+                        textAlign: TextAlign.center),
+                  ),
                 ),
               ],
             ),

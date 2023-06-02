@@ -2,26 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/employee/inOut/model/in_out_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class EmployeeInOutProvider extends ChangeNotifier{
 
-  var date,entryTimeNow,exitTimeNow;
-  var inTime,outTime,diffrence;
-  var duration;
+  dynamic date,entryTimeNow,exitTimeNow;
+  dynamic inTime,outTime,difference;
+  dynamic duration;
   late int entryExitHour;
   List<InOutModel> inOutDataList = [];
 
 
   inOutMapRecords(QuerySnapshot<Map<dynamic, dynamic>> records) async{
-    var _list = records.docs.map(
+    var list = records.docs.map(
             (item) => InOutModel(
           currentDate : item['currentDate'],
               inTime: item['inTime'],
           outTime: item['outTime'], duration: item['duration'],
         )).toList();
-    inOutDataList = _list.cast<InOutModel>();
+    inOutDataList = list.cast<InOutModel>();
     notifyListeners();
   }
 
@@ -67,13 +66,13 @@ class EmployeeInOutProvider extends ChangeNotifier{
       DateTime dateTime = DateTime.parse(dataDate1);
       Duration duration1 = exitTimeNow.difference(dateTime);
       duration = duration1.toString().substring(2,4);
-      print('Duration 1 Date => $dateTime');
+      debugPrint('Duration 1 Date => $dateTime');
 
       String exit = exitTimeNow.toString().substring(11,13);
       String entry = dateTime.toString().substring(11,13);
-      print('Entry Time=> $entry Exit Time=> $exit');
+      debugPrint('Entry Time=> $entry Exit Time=> $exit');
       entryExitHour = int.parse(exit)-int.parse(entry);
-      print('SubStract $entryExitHour');
+      debugPrint('SubStract $entryExitHour');
       //int durationHour = exitTimeNow;
 //      print('Hour = > $durationHour');
 

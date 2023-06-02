@@ -3,10 +3,10 @@ import 'package:employee_attendance_app/employee/reports/openpdf/download_pdf_fi
 import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
+//ignore: must_be_immutable
 class OpenPdfInOutSummary extends StatefulWidget {
 
-  var linked;
+  dynamic linked;
 
   OpenPdfInOutSummary({Key? key,required this.linked}) : super(key: key);
 

@@ -61,13 +61,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         "Create Admin Account",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 24, fontFamily: AppFonts.Medium),
+                            fontSize: 24, fontFamily: AppFonts.medium),
                       ),
                     ),
                     const SizedBox(height: 50),
                     TextFieldMixin().textFieldCardWidget(
                       controller: companyNameController,
-                      prefixIcon: Icon(Icons.person, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.person, color: AppColor.appColor),
                       labelText: 'Company Name',
                       validator: (value) {
                         if (value == null ||
@@ -81,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     TextFieldMixin().textFieldCardWidget(
                       controller: emailController,
-                      prefixIcon: Icon(Icons.email, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.email, color: AppColor.appColor),
                       labelText: 'Email',
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     TextFieldMixin().textFieldCardWidget(
                       controller: mobileController,
-                      prefixIcon: Icon(Icons.phone, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.phone, color: AppColor.appColor),
                       labelText: 'Mobile Number',
                       keyboardType: TextInputType.phone,
                       validator: (value) {
@@ -113,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     TextFieldMixin().textFieldCardWidget(
                       controller: passwordController,
-                      prefixIcon: Icon(Icons.lock, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.lock, color: AppColor.appColor),
                       labelText: 'Password',
                      /* onChanged: (val) {
                         final key = encrypt.Key.fromUtf8('my 32 length key................');
@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     TextFieldMixin().textFieldCardWidget(
                       controller: confirmPasswordController,
-                      prefixIcon: Icon(Icons.lock, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.lock, color: AppColor.appColor),
                       labelText: 'Confirm Password',
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -182,6 +182,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             if (user != null) {
                               Get.off(LoginScreen());
                               AppUtils.instance.showToast(toastMessage: "Register Successfully");
+                              if (!mounted) return;
                               Provider.of<LoginProvider>(context,listen: false).signUpAdmin(email: emailController.text.trim(), companyName: companyNameController.text.trim(),
                                   mobile: mobileController.text.trim(),type: 'Admin');
                               Provider.of<LoadingProvider>(context,listen: false).stopLoading();
@@ -192,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             .stylishButton(onPress: () {}, text: 'Sign Up'),
                       ),
                     ),
-                    SizedBox(height: 20,)
+                    const SizedBox(height: 20,)
                   ],
                 ),
               ),
@@ -209,7 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: TextStyle(
                     decorationThickness: 2,
                     decoration: TextDecoration.none,
-                    fontFamily: AppFonts.Medium,
+                    fontFamily: AppFonts.medium,
                     color: AppColor.appBlackColor),
               ),
             ),
@@ -225,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fontSize: 16,
                       decorationThickness: 1,
                       decoration: TextDecoration.underline,
-                      fontFamily: AppFonts.Medium,
+                      fontFamily: AppFonts.medium,
                       color: AppColor.appColor),
                 ),
               ),

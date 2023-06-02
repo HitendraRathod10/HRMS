@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+//ignore: must_be_immutable
 class AttendanceDetailsScreen extends StatefulWidget {
   AttendanceDetailsScreen({Key? key,required this.passType,required this.email}) : super(key: key);
 
@@ -21,7 +21,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
   /*  var inOutTimeEmployee = FirebaseFirestore.instance.collection("employee")
        .doc(FirebaseAuth.instance.currentUser!.email).collection('InOutTime').snapshots();
 */
-  var inOutTimeEmployee;
+  dynamic inOutTimeEmployee;
 
 
   @override
@@ -72,7 +72,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                       dropdownMaxHeight: 200,
                       buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                       buttonHeight: 15,
-                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.Medium),
+                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
                       iconOnClick: const Icon(Icons.arrow_drop_up),
                       icon: const Icon(Icons.arrow_drop_down),
                       scrollbarRadius: const Radius.circular(40),
@@ -88,7 +88,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                           .map<DropdownMenuItem<String>>((String leaveName) {
                         return DropdownMenuItem<String>(
                             value: leaveName,
-                            child: Text(leaveName,style: TextStyle(fontFamily: AppFonts.regular),)
+                            child: Text(leaveName,style: const TextStyle(fontFamily: AppFonts.regular),)
                         );
                       }).toList(),
                     ),
@@ -125,7 +125,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                       isDense: true,
                       buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                       buttonHeight: 15,
-                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.Medium),
+                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
                       iconOnClick: const Icon(Icons.arrow_drop_up),
                       icon: const Icon(Icons.arrow_drop_down),
                       scrollbarRadius: const Radius.circular(40),
@@ -141,7 +141,7 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                           .map<DropdownMenuItem<String>>((String leaveName) {
                         return DropdownMenuItem<String>(
                             value: leaveName,
-                            child: Text(leaveName,style: TextStyle(fontFamily: AppFonts.regular),)
+                            child: Text(leaveName,style: const TextStyle(fontFamily: AppFonts.regular),)
                         );
                       }).toList(),
                     ),

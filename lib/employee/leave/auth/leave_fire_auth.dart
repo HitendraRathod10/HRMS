@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../../firebase/firebase_collection.dart';
+import 'package:flutter/material.dart';
 
 class LeaveFireAuth{
 
@@ -33,12 +32,12 @@ class LeaveFireAuth{
       "leaveReason": leaveReason.toString(),
       "leaveType": leaveType.toString(),
     };
-    print('Leave Application Data => $data');
+    debugPrint('Leave Application Data => $data');
 
     await documentReferencer
         .set(data)
-        .whenComplete(() => print("Applying for leave"))
-        .catchError((e) => print(e));
+        .whenComplete(() => debugPrint("Applying for leave"))
+        .catchError((e) => debugPrint(e));
   }
 
 }

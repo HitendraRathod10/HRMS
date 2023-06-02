@@ -1,4 +1,3 @@
-import 'package:employee_attendance_app/admin/adminProfile/admin_profile_screen.dart';
 import 'package:employee_attendance_app/admin/home/screen/admin_home_screen.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,8 @@ import '../admin/adminProfile/admin_profile.dart';
 import '../utils/app_colors.dart';
 
 class AdminBottomNavBarScreen extends StatefulWidget {
+  const AdminBottomNavBarScreen({super.key});
+
   @override
   State<AdminBottomNavBarScreen> createState() => _AdminBottomNavBarScreenState();
 }

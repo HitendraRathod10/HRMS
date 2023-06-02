@@ -5,7 +5,6 @@ import 'package:employee_attendance_app/admin/employeeprofile/employee_details_s
 import 'package:employee_attendance_app/employee/home/widget/dashboard_details_widget.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
-import 'package:employee_attendance_app/utils/app_images.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,7 @@ import '../../../employee/publicholiday/screen/public_holiday_screen.dart';
 import '../../../firebase/firebase_collection.dart';
 import '../../leavestatus/leave_status_screen.dart';
 import '../../viewemployee/view_registered_employee_screen.dart';
-
+//ignore: must_be_immutable
 class AdminHomeScreen extends StatelessWidget {
 
   AdminHomeScreen({Key? key}) : super(key: key);
@@ -52,11 +51,11 @@ class AdminHomeScreen extends StatelessWidget {
             stream: FirebaseCollection().adminCollection.doc(FirebaseAuth.instance.currentUser?.email).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
               if (snapshot.hasError) {
-                print('Something went wrong');
+                debugPrint('Something went wrong');
                 return const Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium),);
               }
               else if (!snapshot.hasData || !snapshot.data!.exists) {
-                print('Document does not exist');
+                debugPrint('Document does not exist');
                 return const Center(child: CircularProgressIndicator());
               } else if(snapshot.requireData.exists){
                 Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -90,7 +89,7 @@ class AdminHomeScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Hii, ${capitalizeAllWord(data['companyName'])}',style: TextStyle(fontFamily: AppFonts.medium,color: AppColor.whiteColor),),
+                                  Text('Hii, ${capitalizeAllWord(data['companyName'])}',style: const TextStyle(fontFamily: AppFonts.medium,color: AppColor.whiteColor),),
                                   const SizedBox(height: 3),
                                   Text(hour < 12 ? 'Good Morning' :
                                   hour < 17 ? 'Good Afternoon' : 'Good Evening',style: const TextStyle(fontFamily: AppFonts.bold,fontSize: 24,color: AppColor.whiteColor)),
@@ -311,6 +310,6 @@ class AdminHomeScreen extends StatelessWidget {
 }
 extension StringExtension on String {
   String capitalizeText() {
-    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }

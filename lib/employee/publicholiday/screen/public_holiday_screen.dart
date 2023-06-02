@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/app_colors.dart';
-
+//ignore: must_be_immutable
 class PublicHolidayScreen extends StatelessWidget {
   PublicHolidayScreen({Key? key}) : super(key: key);
 

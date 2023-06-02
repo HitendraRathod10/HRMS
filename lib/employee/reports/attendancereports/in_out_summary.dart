@@ -6,7 +6,6 @@ import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +55,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                       onTap: () {
                         snapshot.selectFromDate(context);
 
-                        print('${
+                        debugPrint('${
                             FirebaseFirestore.instance.collection('employee').
                             doc(FirebaseAuth.instance.currentUser?.email).collection('InOutTime').doc('2022-07-21').
                             snapshots()
@@ -136,7 +135,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                       children: [
                         TextButton(
                             style: TextButton.styleFrom(
-                              primary: Colors.white,
+                              foregroundColor: Colors.white,
                               backgroundColor:
                               AppColor.appColor, //// Text Color
                             ),
@@ -158,7 +157,7 @@ class _InOutSummaryState extends State<InOutSummary> {
                               Navigator.of(context).pop();
                             },
                             style: TextButton.styleFrom(
-                              primary: Colors.white,
+                              foregroundColor: Colors.white,
                               backgroundColor:
                               AppColor.appColor, //// Text Color
                             ),

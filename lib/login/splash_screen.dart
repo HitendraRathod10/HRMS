@@ -12,10 +12,10 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>{
+class SplashScreenState extends State<SplashScreen>{
 
   bool isUserLogin=false;
   String? email;
@@ -30,10 +30,10 @@ class _SplashScreenState extends State<SplashScreen>{
        // Provider.of<LoginProvider>(context,listen: false).getSharedPreferenceData(email);
         if(FirebaseAuth.instance.currentUser?.displayName == 'Admin' || FirebaseAuth.instance.currentUser?.displayName == "null" || FirebaseAuth.instance.currentUser?.displayName == null){
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => AdminBottomNavBarScreen()));
+              MaterialPageRoute(builder: (context) => const AdminBottomNavBarScreen()));
         }else{
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => BottomNavBarScreen()));
+              MaterialPageRoute(builder: (context) => const BottomNavBarScreen()));
         }
       }else{
          Navigator.pushReplacement(context,

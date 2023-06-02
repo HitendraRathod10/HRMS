@@ -24,7 +24,7 @@ class DownloadPdfFile{
 
   Future<bool> savePdf(url, fileName) async {
     Directory? directory;
-    var linked;
+    // var linked;
     try {
       if (Platform.isAndroid) {
         if (await _requestPermission(Permission.storage)) {
@@ -34,12 +34,12 @@ class DownloadPdfFile{
           for (int x = 1; x < paths.length; x++) {
             String folder = paths[x];
             if (folder != "Android") {
-              newPath += "/" + folder;
+              newPath += "/$folder";
             } else {
               break;
             }
           }
-          newPath = newPath + "/HRMS Reports";
+          newPath = "$newPath/HRMS Reports";
           directory = Directory(newPath);
 
           if (!await directory.exists()) {
@@ -47,7 +47,7 @@ class DownloadPdfFile{
           }
           if (await directory.exists()) {
             String tempPath = directory.path;
-            final filePath = tempPath + '/${fileName}.pdf';
+            final filePath = '$tempPath/$fileName.pdf';
             ByteData bytes = ByteData.view(url.buffer);
             final buffer = bytes.buffer;
             File(filePath).writeAsBytes(buffer.asUint8List(url.offsetInBytes, url.lengthInBytes));
@@ -65,7 +65,7 @@ class DownloadPdfFile{
             await directory.create(recursive: true);
           }
           if (await directory.exists()) {
-            File saveFile = File(directory.path + '/${fileName}.pdf');
+            File saveFile = File('${directory.path}/$fileName.pdf');
             //await saveFile.writeAsBytes(linked);
             await saveFile.writeAsBytes(url);
             return true;

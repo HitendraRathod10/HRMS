@@ -1,11 +1,12 @@
 import 'package:employee_attendance_app/employee/home/screen/employee_home_screen.dart';
-import 'package:employee_attendance_app/employee/profile/employee_profile_screen.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
 import '../employee/profile/employee_profile.dart';
 import '../utils/app_colors.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
+  const BottomNavBarScreen({super.key});
+
   @override
   State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
 }
@@ -36,7 +37,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         backgroundColor: AppColor.whiteColor,
-        selectedLabelStyle: const TextStyle(color: AppColor.appColor,fontFamily: AppFonts.Bold),
+        selectedLabelStyle: const TextStyle(color: AppColor.appColor,fontFamily: AppFonts.bold),
         unselectedLabelStyle: const TextStyle(color: AppColor.appBlackColor,fontFamily: AppFonts.regular),
         selectedItemColor: AppColor.appColor,
         unselectedItemColor: AppColor.greyColor,
