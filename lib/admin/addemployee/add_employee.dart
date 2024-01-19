@@ -48,7 +48,7 @@ class _AddEmployeeState extends State<AddEmployee> {
     return path;
   }
 
-  void _selectProfileImage(BuildContext context) async{
+  void selectProfileImage(BuildContext context) async{
     //Pick Image File
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: false,
@@ -154,7 +154,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                   children: [
                     GestureDetector(
                         onTap: (){
-                          _selectProfileImage(context);
+                          selectProfileImage(context);
                           // uploadFile();
                         },
                         child: ClipOval(

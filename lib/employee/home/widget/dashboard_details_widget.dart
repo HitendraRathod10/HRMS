@@ -53,10 +53,11 @@ Widget dashboardDetailsWidget(
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 5),
-                  child: Expanded(
+                  child: SizedBox(
+                    width: 200,
                     child: Text(description,
                         style: const TextStyle(
-                            fontSize: 12, fontFamily: AppFonts.medium),
+                            fontSize: 12, fontFamily: AppFonts.medium),maxLines: 2,overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center),
                   ),
                 ),

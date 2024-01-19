@@ -63,32 +63,30 @@ class TextFieldMixin {
         bool obscureText = false,
         TextStyle? labelStyle}) {
     return Card(
-      child: Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(top: 5.0),
-          // height: 60,
-          child: TextFormField(
-            cursorColor: AppColor.appBlackColor,
-            controller: controller,
-            keyboardType: keyboardType,
-            textInputAction: TextInputAction.next,
-            style: const TextStyle(fontFamily: AppFonts.regular,fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(0),
-              border: InputBorder.none,
-              prefixIcon:prefixIcon,
-              suffixIcon: suffixIcon,
-              focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: AppColor.appColor)),
-              labelText: labelText,
-              labelStyle: const TextStyle(
-                color: AppColor.appBlackColor,fontFamily: AppFonts.regular
-              ),
+      child: Container(
+        margin: const EdgeInsets.only(top: 5.0),
+        // height: 60,
+        child: TextFormField(
+          cursorColor: AppColor.appBlackColor,
+          controller: controller,
+          keyboardType: keyboardType,
+          textInputAction: TextInputAction.next,
+          style: const TextStyle(fontFamily: AppFonts.regular,fontSize: 14),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(0),
+            border: InputBorder.none,
+            prefixIcon:prefixIcon,
+            suffixIcon: suffixIcon,
+            focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColor.appColor)),
+            labelText: labelText,
+            labelStyle: const TextStyle(
+              color: AppColor.appBlackColor,fontFamily: AppFonts.regular
             ),
-            obscureText: obscureText,
-            validator: validator,
-            onChanged: onChanged,
           ),
+          obscureText: obscureText,
+          validator: validator,
+          onChanged: onChanged,
         ),
       ),
     );
