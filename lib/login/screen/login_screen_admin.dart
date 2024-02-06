@@ -120,7 +120,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@"
                           r"[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter a valid email';
+                        return 'Please enter the valid email address';
                       }
                       return null;
                     },
@@ -150,7 +150,7 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                       if (value == null ||
                           value.isEmpty ||
                           value.trim().isEmpty) {
-                        return 'Please enter password';
+                        return 'Please enter the valid password';
                       }
                       return null;
                     },
@@ -160,7 +160,10 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                       onTap: (){
                         Get.to(ResetPasswordScreen());
                       },
-                      child: const Text('Reset Password',style: TextStyle(fontFamily: AppFonts.regular),)),
+                      child: const Padding(
+                        padding: EdgeInsets.fromLTRB(5, 00, 00, 00),
+                        child: Text('Reset Password',style: TextStyle(fontFamily: AppFonts.semiBold,decoration: TextDecoration.underline,color: AppColor.appColor,fontSize: 15,),),
+                      )),
                   const SizedBox(height: 30),
 
                   Align(

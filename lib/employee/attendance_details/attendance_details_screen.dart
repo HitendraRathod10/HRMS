@@ -29,6 +29,8 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
     // TODO: implement initState
     Provider.of<AttendanceDetailsProvider>(context,listen: false).onWillPop();
     super.initState();
+    Provider.of<AttendanceDetailsProvider>(context, listen: false)
+        .generateYearList();
   }
 
   @override
@@ -58,39 +60,63 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
 
                   Expanded(
                     flex: 1,
-                    child: DropdownButtonFormField2(
-                      decoration: InputDecoration(
-                        isDense: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 7.5, horizontal: 7.5),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(color: Colors.black)),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          value: Provider.of<AttendanceDetailsProvider>(context,
+                                  listen: false)
+                              .selectMonth,
+                          isDense: true,
+                          selectedItemHighlightColor: AppColor.backgroundColor,
+                          dropdownMaxHeight: 200,
+                          style: const TextStyle(
+                              color: AppColor.appBlackColor,
+                              fontSize: 14,
+                              fontFamily: AppFonts.medium),
+                          iconOnClick: const Icon(Icons.arrow_drop_up),
+                          icon: const Icon(Icons.arrow_drop_down),
+                          scrollbarRadius: const Radius.circular(40),
+                          scrollbarThickness: 3,
+                          scrollbarAlwaysShow: true,
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              Provider.of<AttendanceDetailsProvider>(context,
+                                      listen: false)
+                                  .selectMonth = newValue!;
+                              Provider.of<AttendanceDetailsProvider>(context,
+                                      listen: false)
+                                  .getMonth;
+                            });
+                          },
+                          items: Provider.of<AttendanceDetailsProvider>(context,
+                                  listen: false)
+                              .monthItem
+                              .map<DropdownMenuItem<String>>(
+                                  (String leaveName) {
+                            return DropdownMenuItem<String>(
+                                value: leaveName,
+                                child: Text(
+                                  leaveName,
+                                  style: const TextStyle(
+                                    fontFamily: AppFonts.regular,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ));
+                          }).toList(),
                         ),
                       ),
-                      value: Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth,
-                      isExpanded: true,
-                      isDense: true,
-                      selectedItemHighlightColor: AppColor.backgroundColor,
-                      dropdownMaxHeight: 200,
-                      buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                      buttonHeight: 15,
-                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
-                      iconOnClick: const Icon(Icons.arrow_drop_up),
-                      icon: const Icon(Icons.arrow_drop_down),
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 3,
-                      scrollbarAlwaysShow: true,
-                      dropdownDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
-                      buttonDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
-                      onChanged: (String? newValue) {
-                        Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth = newValue!;
-                        Provider.of<AttendanceDetailsProvider>(context,listen: false).getMonth;
-                      },
-                      items: Provider.of<AttendanceDetailsProvider>(context,listen: false).monthItem
-                          .map<DropdownMenuItem<String>>((String leaveName) {
-                        return DropdownMenuItem<String>(
-                            value: leaveName,
-                            child: Text(leaveName,style: const TextStyle(fontFamily: AppFonts.regular),)
-                        );
-                      }).toList(),
                     ),
                   ),
                 ],
@@ -111,39 +137,61 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
 
                   Expanded(
                     flex: 1,
-                    child: DropdownButtonFormField2(
-                      decoration: InputDecoration(
-                        isDense: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 7.5, horizontal: 7.5),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(color: Colors.black)),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          value: Provider.of<AttendanceDetailsProvider>(context,
+                                  listen: false)
+                              .selectYear,
+                          dropdownMaxHeight: 200,
+                          selectedItemHighlightColor: AppColor.backgroundColor,
+                          isDense: true,
+                          style: const TextStyle(
+                              color: AppColor.appBlackColor,
+                              fontSize: 14,
+                              fontFamily: AppFonts.medium),
+                          iconOnClick: const Icon(Icons.arrow_drop_up),
+                          icon: const Icon(Icons.arrow_drop_down),
+                          scrollbarRadius: const Radius.circular(40),
+                          scrollbarThickness: 3,
+                          scrollbarAlwaysShow: true,
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              Provider.of<AttendanceDetailsProvider>(context,
+                                      listen: false)
+                                  .selectYear = newValue!;
+                              Provider.of<AttendanceDetailsProvider>(context,
+                                      listen: false)
+                                  .getYear;
+                            });
+                          },
+                          items: Provider.of<AttendanceDetailsProvider>(context,
+                                  listen: false)
+                              .years
+                              .map<DropdownMenuItem<String>>(
+                                  (String leaveName) {
+                            return DropdownMenuItem<String>(
+                                value: leaveName,
+                                child: Text(
+                                  leaveName,
+                                  style: const TextStyle(
+                                      fontFamily: AppFonts.regular),
+                                ));
+                          }).toList(),
                         ),
                       ),
-                      value: Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear,
-                      isExpanded: true,
-                      dropdownMaxHeight: 200,
-                      selectedItemHighlightColor: AppColor.backgroundColor,
-                      isDense: true,
-                      buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                      buttonHeight: 15,
-                      style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
-                      iconOnClick: const Icon(Icons.arrow_drop_up),
-                      icon: const Icon(Icons.arrow_drop_down),
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 3,
-                      scrollbarAlwaysShow: true,
-                      dropdownDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
-                      buttonDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10),),
-                      onChanged: (String? newValue) {
-                        Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear = newValue!;
-                        Provider.of<AttendanceDetailsProvider>(context,listen: false).getYear;
-                      },
-                      items: Provider.of<AttendanceDetailsProvider>(context,listen: false).yearItem
-                          .map<DropdownMenuItem<String>>((String leaveName) {
-                        return DropdownMenuItem<String>(
-                            value: leaveName,
-                            child: Text(leaveName,style: const TextStyle(fontFamily: AppFonts.regular),)
-                        );
-                      }).toList(),
                     ),
                   ),
                 ],
@@ -156,20 +204,20 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                 Container(
                     margin: const EdgeInsets.only(right: 20),
                     padding: const EdgeInsets.only(left: 25),
-                    child: const Text('Search Panel',style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium),)),
-                Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: TextButton(onPressed: (){
-                      setState((){
-                        debugPrint(DateFormat.yMMMM().format(DateTime.now()));
-                        debugPrint(Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth);
-                        debugPrint(Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear);
-                        debugPrint('${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth} ${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear}');
-                        inOutTimeEmployee = FirebaseFirestore.instance.collection("employee")
-                            .doc(FirebaseAuth.instance.currentUser!.email).collection('InOutTime').
-                        where('yearMonth',isEqualTo: '${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth} ${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear}').snapshots();
-                      });
-                    }, child: const Text('Go',style: TextStyle(fontFamily: AppFonts.medium),))),
+                    child: const Text('Filtered data',style: TextStyle(fontSize: 18,fontFamily: AppFonts.medium),)),
+                // Container(
+                //     margin: const EdgeInsets.only(right: 20),
+                //     child: TextButton(onPressed: (){
+                //       setState((){
+                //         debugPrint(DateFormat.yMMMM().format(DateTime.now()));
+                //         debugPrint(Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth);
+                //         debugPrint(Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear);
+                //         debugPrint('${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth} ${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear}');
+                //         inOutTimeEmployee = FirebaseFirestore.instance.collection("employee")
+                //             .doc(FirebaseAuth.instance.currentUser!.email).collection('InOutTime').
+                //         where('yearMonth',isEqualTo: '${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectMonth} ${Provider.of<AttendanceDetailsProvider>(context,listen: false).selectYear}').snapshots();
+                //       });
+                //     }, child: const Text('Go',style: TextStyle(fontFamily: AppFonts.medium),))),
               ],
             ),
             const SizedBox(height: 10,),

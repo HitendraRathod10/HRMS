@@ -10,8 +10,10 @@ class ButtonMixin {
     double? fontSize,
     FontWeight?fontWeight,
     double? width,
+    double? borderWidth,
     double? height,
     Color? bgColor,
+    Color? borderColor,
     Color? textColor,
     BoxDecoration? boxDecoration,
   }){
@@ -22,7 +24,11 @@ class ButtonMixin {
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
           colors: [AppColor.appColor,AppColor.greyColorLight]
-        )
+        ),
+      border: Border.all(
+        width: borderWidth ?? 0,
+        color: borderColor ?? Colors.transparent
+      ),
     );
 
     return Container(

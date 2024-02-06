@@ -128,6 +128,8 @@ class _ViewAdminEmployeeProfileScreen extends State<ViewAdminEmployeeProfileScre
                                     value.isEmpty ||
                                     value.trim().isEmpty) {
                                   return 'Please enter mobile number';
+                                }else if(value.length < 10){
+                                  return "Please enter valid mobile number";
                                 }
                                 return null;
                               },

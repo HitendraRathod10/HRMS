@@ -80,6 +80,12 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                             labelText: 'Mobile',
                             controller: mobileController..text = data['mobile'],
                             keyboardType: TextInputType.phone,
+                            validator: (value){
+                              if(value!.length < 10){
+                                return 'Please enter valid Mobile number';
+                              }
+                              return null;
+                            },
                           ),
 
                           const SizedBox(height: 50),
@@ -88,7 +94,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                             child: GestureDetector(
                               onTap: () async {
                                 if(formKey.currentState!.validate() ) {
-                                    AppUtils.instance.showToast(toastMessage: "Edit Profile");
+                                    AppUtils.instance.showToast(toastMessage: "Updated profile successfully.");
                                     Provider.of<LoginProvider>(context,listen: false).signUpAdmin(email: emailController.text.trim(),
                                         companyName: companyNameController.text.trim(),
                                         mobile: mobileController.text.trim(),type: 'Admin');
@@ -96,7 +102,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                                 }
                               },
                               child: ButtonMixin()
-                                  .stylishButton(onPress: () {}, text: 'Edit Profile'),
+                                  .stylishButton(onPress: () {}, text: 'Update Profile'),
                             ),
                           ),
                           const SizedBox(height: 20)

@@ -28,6 +28,8 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
   late String currentDate;
   late String currentDateFire;
   late String currentYearMonth;
+  bool inSelected = false;
+  bool outSelected = false;
 
  /* getInOutData() async{
     var querySnapshots = await InOutFireAuth().mainCollection.get();
@@ -79,7 +81,8 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                             onTap: () async {
                               snapshot.currentDate();
                               snapshot.entryTime();
-
+                              inSelected = true;
+                              outSelected = false;
                              /* if(currentDateFire == '2022-07-06'){
                                 print('I am ==');
                                 print(currentDate);
@@ -126,7 +129,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                       }
 */
                             },
-                            child: ButtonMixin().stylishButton(text: 'In',),
+                            child: ButtonMixin().stylishButton(text: 'In',borderColor: inSelected ? Colors.red : Colors.transparent, borderWidth: 2),
                           ),
                           const SizedBox(width: 20),
                           GestureDetector(
@@ -138,7 +141,8 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                               //getInOutData();
                               //   snapshot.entryTime();
                               snapshot.currentDate();
-
+                              outSelected = true;
+                              inSelected = false;
                            //   print('current Date ${currentDate} == $currentDateFire');
 
                               var querySnapshots = await InOutFireAuth().mainCollection.get();
@@ -157,7 +161,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                   yearMonth: DateFormat.yMMMM().format(DateTime.now()),
                                   duration: '${snapshot.entryExitHour.toString().length == 1 ? '0${snapshot.entryExitHour}' : snapshot.entryExitHour}:${snapshot.duration.toString()}');
                             },
-                            child: ButtonMixin().stylishButton(text: 'Out'),
+                            child: ButtonMixin().stylishButton(text: 'Out',borderColor: outSelected ? Colors.red : Colors.transparent, borderWidth: 2),
                           )
                         ],
                       );
@@ -206,26 +210,23 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                         ),
                                         const SizedBox(height: 5),
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            const Expanded(
-                                                flex: 1,
-                                                child: Text('In Time', style: TextStyle(fontFamily: AppFonts.medium))),
-                                            Expanded(flex: 1,
-                                                child: Text(streamSnapshot.data?.docs[index]['inTime'],style: const TextStyle(fontFamily: AppFonts.medium))),
-                                            const Expanded(
-                                              //flex: 1,
-                                                child: Center(
-                                                    child: Text('Out Time', style: TextStyle(fontFamily: AppFonts.medium),))),
-                                            Expanded(
-                                                child: Center(
-                                                    child: Text(
-                                                        streamSnapshot.data
-                                                            ?.docs[index]['outTime'] ?? '',style: const TextStyle(fontFamily: AppFonts.medium)))),
-                                          ],
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                                'In Time : ${streamSnapshot.data?.docs[index]['inTime']}',
+                                                style: const TextStyle(
+                                                    fontFamily:
+                                                        AppFonts.medium))),
+                                        Expanded(
+                                          child: Text(
+                                            'Out Time : ${streamSnapshot.data?.docs[index]['outTime'] ?? ''}',
+                                            style: const TextStyle(
+                                                fontFamily: AppFonts.medium),
+                                          ),
                                         ),
-                                        const SizedBox(height: 5),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 5),
                                         Row(
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

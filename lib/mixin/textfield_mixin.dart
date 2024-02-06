@@ -17,8 +17,10 @@ class TextFieldMixin {
       String? Function(String?)? validator,
         String? initialValue,
       bool readOnly = false,
+      bool obscureText = false,
       InputBorder? focusedBorder,
       String? labelText,
+      FocusNode? focusNode,
       TextStyle? labelStyle}) {
     return Padding(
       padding: const EdgeInsets.only(left: 20,right: 20),
@@ -30,7 +32,8 @@ class TextFieldMixin {
         readOnly: readOnly,
         keyboardType: keyboardType,
         maxLines: maxLines,
-        validator: validator,
+        focusNode: focusNode,
+        validator: validator,onTap: onTap,
         style: const TextStyle(fontFamily: AppFonts.regular,fontSize: 14),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),
@@ -41,8 +44,10 @@ class TextFieldMixin {
           labelStyle: const TextStyle(
             color: AppColor.appBlackColor,fontFamily: AppFonts.regular,
           ),
+          suffixIcon: suffixIcon,
           labelText: labelText,
         ),
+        obscureText: obscureText,
       ),
     );
   }

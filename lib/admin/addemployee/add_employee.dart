@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../login/auth/login_employee_fire_auth.dart';
@@ -28,17 +30,20 @@ class _AddEmployeeState extends State<AddEmployee> {
   TextEditingController emailController = TextEditingController();
   TextEditingController employeeNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  MaskedTextController dobController = MaskedTextController(mask: '00/00/0000');
+  TextEditingController dobController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController designationController = TextEditingController();
   TextEditingController branchNameController = TextEditingController();
-  MaskedTextController dateOfJoinController = MaskedTextController(mask: '00/00/0000');
+  TextEditingController dateOfJoinController = TextEditingController();
   TextEditingController employmentTypeController = TextEditingController();
   TextEditingController exprienceGradeController = TextEditingController();
   TextEditingController managerController = TextEditingController();
   File? file;
+  bool passwordVisibility = false;
+  String? _employmentType;
+  final List<String> employmentTypes = ['Probation', 'Permanent'];
 
   Future<File> imageSizeCompress(
       {required File image,
@@ -124,6 +129,34 @@ class _AddEmployeeState extends State<AddEmployee> {
 
   }
 
+  Future selectDateForDOB() async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1500),
+        lastDate: DateTime.now());
+    if (picked != null) {
+      print("pickeddd $picked");
+      setState(
+          () => {dobController.text = DateFormat('dd/MM/yyyy').format(picked)});
+      print("dobController ${dobController.text}");
+    }
+  }
+
+  Future selectDateForDOJ() async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1500),
+        lastDate: DateTime.now());
+    if (picked != null) {
+      print("pickeddd $picked");
+      setState(
+              () => {dateOfJoinController.text = DateFormat('dd/MM/yyyy').format(picked)});
+      print("dateOfJoinController ${dateOfJoinController.text}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     //  final ref1 = FirebaseStorage.instance.ref().child("images/${FirebaseAuth.instance.currentUser!.uid}.png");
@@ -169,16 +202,21 @@ class _AddEmployeeState extends State<AddEmployee> {
                               child: const Icon(Icons.person_outline_rounded,size: 50,color: AppColor.whiteColor,)) :
                           Image.file(
                             file!,
-                            height: 100,width: 100,
+                            height: 80,width: 80,
                             fit: BoxFit.fill,),
                         )
                     ),
                     Positioned(
                       left: 50,
                       top: 40,
-                      child: ClipOval(child: Container(
-                        height: 40,width: 40,
-                        color:AppColor.whiteColor,child: const Icon(Icons.camera_alt,color: AppColor.appColor,),)),
+                      child: GestureDetector(
+                        onTap: (){
+                          selectProfileImage(context);
+                        },
+                        child: ClipOval(child: Container(
+                          height: 40,width: 40,
+                          color:AppColor.whiteColor,child: const Icon(Icons.camera_alt,color: AppColor.appColor,),)),
+                      ),
                     )
                   ],
                 ),
@@ -194,7 +232,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter name';
+                          return 'Please enter the employee name';
                         }
                         return null;
                       },
@@ -207,12 +245,12 @@ class _AddEmployeeState extends State<AddEmployee> {
                         labelText: 'Email',
                         validator: (value){
                           if (value!.isEmpty) {
-                            return 'Please enter email';
+                            return 'Please enter the employee email';
                           }else if(value.trim().isEmpty ||
                               !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@"
                               r"[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)){
-                            return 'Enter a valid email';
+                            return 'Please enter a valid email';
                           }
                           return null;
                         }
@@ -227,7 +265,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter mobile number';
+                          return 'Please enter the employee mobile number';
+                        } else if(value.length < 10){
+                          return "please enter 10-digit mobile number";
                         }
                         return null;
                       },
@@ -235,15 +275,18 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: dobController,
-                      keyboardType: TextInputType.datetime,
                       prefixIcon: const Icon(Icons.date_range_outlined,
                           color: AppColor.appColor),
+                      onTap: (){
+                        selectDateForDOB();
+                        // FocusScope.of(context).requestFocus(FocusNode());
+                      },
                       labelText: 'Date of Birth',
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter DOB';
+                          return 'Please enter the employee birth date';
                         }
                         return null;
                       },
@@ -258,7 +301,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter address';
+                          return 'Please enter the employee address';
                         }
                         return null;
                       },
@@ -269,13 +312,13 @@ class _AddEmployeeState extends State<AddEmployee> {
                       controller: designationController,
                       keyboardType: TextInputType.text,
                       prefixIcon:
-                      const Icon(Icons.post_add_sharp, color: AppColor.appColor),
+                      const Icon(Icons.account_box, color: AppColor.appColor),
                       labelText: 'Designation',
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter designation';
+                          return 'Please enter the employee designation';
                         }
                         return null;
                       },
@@ -291,7 +334,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter department';
+                          return 'Please enter the employee department';
                         }
                         return null;
                       },
@@ -307,7 +350,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter branch';
+                          return 'Please enter the employee branch';
                         }
                         return null;
                       },
@@ -315,7 +358,10 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: dateOfJoinController,
-                      keyboardType: TextInputType.datetime,
+                      onTap: (){
+                        selectDateForDOJ();
+                        // FocusScope.of(context).requestFocus(FocusNode());
+                      },
                       prefixIcon:
                       const Icon(Icons.date_range_outlined, color: AppColor.appColor),
                       labelText: 'Joining Date',
@@ -323,13 +369,103 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter joining date';
+                          return 'Please enter the employee joining date';
                         }
                         return null;
                       },
                     ),
-                    const SizedBox(height: 10),
-                    TextFieldMixin().textFieldWidget(
+                    /*DropdownButton2(
+                      value: _employmentType,
+                      dropdownMaxHeight: 200,
+                      selectedItemHighlightColor: AppColor.backgroundColor,
+                      isDense: true,
+                      style: const TextStyle(
+                          color: AppColor.appBlackColor,
+                          fontSize: 14,
+                          fontFamily: AppFonts.medium),
+                      iconOnClick: const Icon(Icons.arrow_drop_up),
+                      icon: const Icon(Icons.arrow_drop_down),
+                      scrollbarRadius: const Radius.circular(40),
+                      scrollbarThickness: 3,
+                      scrollbarAlwaysShow: true,
+                      dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      buttonDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      onChanged: (value) =>
+                          setState(() {
+                            print("changes $value");
+                          }),
+                      items: const [
+                        DropdownMenuItem(
+                          child: Text('Probation'),
+                          value: 'Probation',
+                        ),
+                        DropdownMenuItem(
+                          child: Text('Permanent'),
+                          value: 'Permanent',
+                        ),
+                      ],
+                    ),*/
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 00),
+                      child: DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(
+                            prefixIcon:
+                            Icon(Icons.person_pin_outlined, color: AppColor.appColor),
+                            contentPadding: EdgeInsets.fromLTRB(00, 00, 00, 00),
+                            labelText: 'Employment Type',
+                            labelStyle: TextStyle(
+                                fontFamily: AppFonts.regular, fontSize: 14, color: AppColor.appColor)),
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              value.trim().isEmpty) {
+                            return 'Please select an employee type';
+                          }
+                          return null;
+                        },
+                        value: _employmentType,
+                        onChanged: (value) =>
+                            setState(() => _employmentType = value),
+                        items: const [
+                          DropdownMenuItem(
+                            child: Text('Probation'),
+                            value: 'Probation',
+                          ),
+                          DropdownMenuItem(
+                            child: Text('Permanent'),
+                            value: 'Permanent',
+                          ),
+                        ],
+                      ),
+                    ),
+                    /*Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 00, 20, 00),
+                      child: DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(
+                          labelText: 'Employment Type',prefixIcon: Icon(Icons.person_pin_outlined, color: AppColor.appColor),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty|| value.trim().isEmpty) {
+                            return 'Please select an employment type';
+                          }
+                          return null; // No errors
+                        },
+                        items: employmentTypes.map((type) {
+                          return DropdownMenuItem<String>(
+                            value: type,
+                            child: Text(type),
+                          );
+                        }).toList(),
+                        value: selectedEmploymentType,
+                        onChanged: (value) =>
+                            setState(() => selectedEmploymentType = value),
+                      ),
+                    ),*/
+                    /*TextFieldMixin().textFieldWidget(
                         controller: employmentTypeController,
                         keyboardType: TextInputType.text,
                         prefixIcon:
@@ -339,11 +475,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                           if (value == null ||
                               value.isEmpty ||
                               value.trim().isEmpty) {
-                            return 'Please enter employment type';
+                            return 'Please enter the employee type';
                           }
                           return null;
                         }
-                    ),
+                    ),*/
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: exprienceGradeController,
@@ -355,7 +491,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter experience year';
+                          return 'Please enter the employee experience';
                         }
                         return null;
                       },
@@ -371,7 +507,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
-                          return 'Please enter manager name';
+                          return 'Please enter the employee manager';
                         }
                         return null;
                       },
@@ -382,11 +518,28 @@ class _AddEmployeeState extends State<AddEmployee> {
                       prefixIcon:
                       const Icon(Icons.lock_outline, color: AppColor.appColor),
                       labelText: 'Password',
+                      obscureText: passwordVisibility ? false : true,
+                      suffixIcon: IconButton(
+                          highlightColor: Colors.transparent,
+                          onPressed: () {
+                            setState(() {
+                              passwordVisibility = !passwordVisibility;
+                            });
+                          },
+                          icon: passwordVisibility
+                              ? const Icon(
+                                  Icons.visibility,
+                                  color: AppColor.appColor,
+                                )
+                              : const Icon(Icons.visibility_off,
+                                  color: AppColor.appColor)),
                       validator: (value){
                         if (value!.isEmpty || value.trim().isEmpty) {
-                          return 'Please enter password';
+                          return 'Please enter the password';
                         } else if (value.length < 8) {
                           return 'Password must be atLeast 8 characters';
+                        } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(value)) {
+                          return 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
                         }
                         return null;
                       },
@@ -403,7 +556,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                       onTap: () async {
 
                         if(file == null){
-                          AppUtils.instance.showToast(toastMessage: 'Please choose the image');
+                          AppUtils.instance.showToast(toastMessage: 'Please choose employee image');
                         }
                         if (formKey.currentState!.validate()) {
                           if(file != null) {

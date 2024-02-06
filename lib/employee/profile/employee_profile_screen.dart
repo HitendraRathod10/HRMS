@@ -205,6 +205,12 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                               labelText: 'Mobile',
                               controller: mobileController..text = data['mobile'],
                               keyboardType: TextInputType.text,
+                              validator: (value){
+                                if(value!.length < 10){
+                                  return 'Please enter valid Mobile number';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 10,),
                             TextFieldMixin().textFieldProfileWidget(
@@ -272,7 +278,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                                     // if(url != ''){
                                     uploadFile();
                                     Timer(const Duration(seconds: 5), () {
-                                      AppUtils.instance.showToast(toastMessage: "Edit Profile");
+                                      AppUtils.instance.showToast(toastMessage: "Updated profile successfully.");
                                       AddEmployeeFireAuth().addEmployee(email: emailController.text, employeeName: employeeNameController.text,
                                           mobile: mobileController.text, dob: dobController.text,
                                           address: addressController.text, designation: designationController.text, department: departmentController.text,
@@ -290,7 +296,7 @@ class _EmployeeProfileScreenState extends State<EmployeeProfileScreen> {
                               //  debugPrint('Image Url = > $url');
                                 },
                                 child: ButtonMixin()
-                                    .stylishButton(onPress: () {}, text: 'Edit Profile'),
+                                    .stylishButton(onPress: () {}, text: 'Update Profile'),
                               ),
                             ),
                             const SizedBox(height: 20)

@@ -63,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
           controller: customerTabController,
           children:  const [
             LoginScreenAdmin(),
+            LoginScreenAdmin(),
             // LoginScreenAdmin(),
             // LoginScreenEmployee()
           ],

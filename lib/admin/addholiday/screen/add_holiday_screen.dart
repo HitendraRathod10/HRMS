@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../mixin/button_mixin.dart';
 import '../../../utils/app_colors.dart';
+import '../../../widget/admin_bottom_navigationbar.dart';
 import '../provider/add_holiday_provider.dart';
 
 class AddHolidayScreen extends StatefulWidget {
@@ -104,6 +105,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.fromLTRB(10, 00, 00, 00),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColor.appColor),
                       ),),
@@ -131,6 +133,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                       textInputAction: TextInputAction.done,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(10, 00, 00, 00),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColor.appColor),
                         ),),
@@ -169,6 +172,7 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                         AddHolidayFireAuth().addPublicHoliday(holidayDate: DateFormat('dd-MM-yyyy').format(Provider.of<AddHolidayProvider>(context,listen: false).holidayDate),
                             holidayName: holidayNameController.text,
                             holidayDescription: descriptionController.text);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const AdminBottomNavBarScreen()), (route) => false);
                         Provider.of<AddHolidayProvider>(context,listen: false).picked =null;
                         holidayNameController.clear();
                         descriptionController.clear();

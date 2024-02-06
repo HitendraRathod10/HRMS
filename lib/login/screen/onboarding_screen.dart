@@ -69,8 +69,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>{
                     },
                     child: Container(
                       color: Colors.transparent,
-                        height:40,width:70,child: const Center(child: Text('Skip',textAlign: TextAlign.center,style: TextStyle(fontFamily: AppFonts.medium),))),
+                        height:40,width:70,child: const Center(child: Text('Skip',textAlign: TextAlign.center,style: TextStyle(fontFamily: AppFonts.bold,fontSize: 20),))),
                   ),
+              ),
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Obx(() {
+                  return _controller.selectedPageIndex.value != 0
+                      ? GestureDetector(
+                          onTap: () {
+                            _controller.pageController.previousPage(
+                                duration: 300.milliseconds,
+                                curve: Curves.easeInOut);
+                          },
+                          child: Container(
+                              color: Colors.transparent,
+                              height: 40,
+                              width: 40,
+                              child:
+                                  const Center(child: Icon(Icons.arrow_back))),
+                        )
+                      : const SizedBox.shrink();
+                }),
               ),
               Positioned(
                 bottom: 20,
@@ -103,7 +124,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>{
                     onTap: _controller.forwardAction,
                     child: Container(
                         color: Colors.transparent,
-                        height:40,width:100,child: Center(child: Text(_controller.isLastPage ? 'Get Started' : 'Next -->',textAlign: TextAlign.center,style: const TextStyle(fontFamily: AppFonts.medium),))),
+                        height:40,child: Center(child: Text(_controller.isLastPage ? 'Get Started' : 'Next -->',textAlign: TextAlign.center,style: const TextStyle(fontFamily: AppFonts.semiBold,fontSize: 20),))),
                   );
                 }),
               ),

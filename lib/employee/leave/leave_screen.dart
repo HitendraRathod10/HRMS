@@ -165,6 +165,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
+                                contentPadding: const EdgeInsets.fromLTRB(-5, 00, 5, 15)
                               ),
                               value: snapshot.selectLeaveType,
                               validator: (value) {
@@ -176,8 +177,8 @@ class _LeaveScreenState extends State<LeaveScreen> {
                               hint: const Text('Select Leave Type',style: TextStyle(fontFamily: AppFonts.medium)),
                               isExpanded: true,
                               isDense: true,
-                              buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                              buttonHeight: 20,
+                              // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                              // buttonHeight: 50,
                               style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
                               iconOnClick: const Icon(Icons.arrow_drop_up),
                               icon: const Icon(Icons.arrow_drop_down),
@@ -208,6 +209,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                   .map<DropdownMenuItem<String>>((String leaveName) {
                                 return DropdownMenuItem<String>(
                                     value: leaveName,
+                                    alignment: AlignmentDirectional.topCenter,
                                     child: Row(
                                       children: [
                                         Container(
@@ -584,7 +586,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                                       leaveEmployeeName: '${data['employeeName']?.toString().capitalizeFirst}');
                                   leaveTypeController.clear();
                                   reasonController.clear();
-                                  Get.to(const BottomNavBarScreen());
+                                  Get.offAll(const BottomNavBarScreen());
                                 }
                               },
                               child: ButtonMixin()

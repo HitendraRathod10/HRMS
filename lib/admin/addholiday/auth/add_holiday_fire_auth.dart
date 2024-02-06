@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../firebase/firebase_collection.dart';
+import '../../../utils/app_utils.dart';
 
 class AddHolidayFireAuth{
 
@@ -29,7 +30,9 @@ class AddHolidayFireAuth{
     });
     await documentReferencer
         .set(data)
-        .whenComplete(() => Get.snackbar('Holiday', 'Added Public Holiday'))
+        .whenComplete(() {
+        AppUtils.instance.showToast(toastMessage: 'Public Holiday is added.');
+    })
         .catchError((e) => Get.snackbar('Error', e));
   }
 

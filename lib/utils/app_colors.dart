@@ -17,4 +17,5 @@ class AppColor {
   static const redColor = Color(0xffC41414);
   // static const grey = Color(0xff00000080);
   static const platinumColor = Color(0xfff1eeee);
+  static const lightBodyColor = Color(0xffFAFAFA);
 }

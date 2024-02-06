@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/app_utils.dart';
+
 class LeaveFireAuth{
 
   Future<void> applyLeave(
@@ -35,9 +37,10 @@ class LeaveFireAuth{
     debugPrint('Leave Application Data => $data');
 
     await documentReferencer
-        .set(data)
-        .whenComplete(() => debugPrint("Applying for leave"))
-        .catchError((e) => debugPrint(e));
+        .set(data).whenComplete(() {
+      debugPrint("Applying for leave");
+      AppUtils.instance.showToast(toastMessage: "You have successfully applied leave.");
+    }).catchError((e) => debugPrint(e));
   }
 
 }
