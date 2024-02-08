@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -261,6 +262,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                       keyboardType: TextInputType.phone,
                       prefixIcon: const Icon(Icons.phone_iphone_rounded, color: AppColor.appColor),
                       labelText: 'Mobile',
+                      inputFormatters: [LengthLimitingTextInputFormatter(10),FilteringTextInputFormatter.digitsOnly],
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||

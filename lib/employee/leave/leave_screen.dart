@@ -160,33 +160,58 @@ class _LeaveScreenState extends State<LeaveScreen> {
                             width: double.infinity,
                             color: Colors.transparent,
                             margin: const EdgeInsets.only(left: 20, right: 20),
-                            child: DropdownButtonFormField2(
+                            child: DropdownButtonFormField2<String>(
                               decoration: InputDecoration(
+
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                contentPadding: const EdgeInsets.fromLTRB(-5, 00, 5, 15)
+                                // contentPadding: const EdgeInsets.fromLTRB(-5, 00, 5, 15),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 15),
+
                               ),
+                              buttonStyleData: const ButtonStyleData(
+                                padding: EdgeInsets.only(right: 5),
+                              ),
+                              dropdownStyleData: DropdownStyleData(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  maxHeight: 200,
+                                  useSafeArea: true,
+                                  isOverButton: false,
+                                  offset: const Offset(0, -15)
+                              ),
+                              autovalidateMode:AutovalidateMode.onUserInteraction ,
+
                               value: snapshot.selectLeaveType,
                               validator: (value) {
                                 if (value == null) {
-                                  return 'Leave type is required';
+                                  return '   Leave type is required';
                                 }
                                 return null;
                               },
+
                               hint: const Text('Select Leave Type',style: TextStyle(fontFamily: AppFonts.medium)),
                               isExpanded: true,
                               isDense: true,
                               // buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                               // buttonHeight: 50,
                               style: const TextStyle(color: AppColor.appBlackColor, fontSize: 14,fontFamily: AppFonts.medium),
-                              iconOnClick: const Icon(Icons.arrow_drop_up),
-                              icon: const Icon(Icons.arrow_drop_down),
-                              scrollbarRadius: const Radius.circular(40),
-                              scrollbarThickness: 3,
-                              scrollbarAlwaysShow: true,
-                              dropdownDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                              buttonDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+
+                              iconStyleData: const IconStyleData(
+                                  icon: Icon(Icons.arrow_drop_down),
+
+                              ),
+
+                              // iconOnClick: const Icon(Icons.arrow_drop_up),
+                              // icon: const Icon(Icons.arrow_drop_down),
+                              // scrollbarRadius: const Radius.circular(40),
+                              // scrollbarThickness: 3,
+                              // scrollbarAlwaysShow: true,
+                              // dropdownDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                              // buttonDecoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                               onChanged: (String? newValue) {
                                 snapshot.selectLeaveType = newValue!;
                                 snapshot.getLeaveType;

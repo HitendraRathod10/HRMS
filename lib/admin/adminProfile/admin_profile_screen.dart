@@ -4,6 +4,7 @@ import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:employee_attendance_app/utils/app_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../login/provider/login_provider.dart';
@@ -80,6 +81,7 @@ class _AdminProfileScreen extends State<AdminProfileScreen> {
                             labelText: 'Mobile',
                             controller: mobileController..text = data['mobile'],
                             keyboardType: TextInputType.phone,
+                            inputFormatters: [LengthLimitingTextInputFormatter(10),FilteringTextInputFormatter.digitsOnly],
                             validator: (value){
                               if(value!.length < 10){
                                 return 'Please enter valid Mobile number';

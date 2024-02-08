@@ -44,7 +44,8 @@ dependencies:
   flutter_native_image: ^0.0.6+1
   flutter_spinkit: ^5.1.0
   #table_calendar: ^3.0.6
-  dropdown_button2: ^1.6.3
+  dropdown_button2: ^2.1.4
+#  dropdown_button2: ^1.6.3
   time_range: ^1.0.3
   pdf: ^3.8.1
   syncfusion_flutter_pdfviewer: ^20.2.39-beta

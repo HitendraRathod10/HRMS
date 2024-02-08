@@ -73,23 +73,38 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                                   listen: false)
                               .selectMonth,
                           isDense: true,
-                          selectedItemHighlightColor: AppColor.backgroundColor,
-                          dropdownMaxHeight: 200,
+                          // selectedItemHighlightColor: AppColor.backgroundColor,
+                          // dropdownMaxHeight: 200,
                           style: const TextStyle(
                               color: AppColor.appBlackColor,
                               fontSize: 14,
                               fontFamily: AppFonts.medium),
-                          iconOnClick: const Icon(Icons.arrow_drop_up),
-                          icon: const Icon(Icons.arrow_drop_down),
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 3,
-                          scrollbarAlwaysShow: true,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                          dropdownStyleData: DropdownStyleData(
+                              padding: const EdgeInsets.only(top: 0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+
+                              ),
+                              scrollbarTheme: const ScrollbarThemeData(
+                                thickness: MaterialStatePropertyAll(3),
+                              ),
+                              maxHeight: 200,
+                              useSafeArea: true,
+                              isOverButton: false,
+                              offset: const Offset(0, -10)
                           ),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+
+                          // iconOnClick: const Icon(Icons.arrow_drop_up),
+                          // icon: const Icon(Icons.arrow_drop_down),
+                          // scrollbarRadius: const Radius.circular(40),
+                          // scrollbarThickness: 3,
+                          // scrollbarAlwaysShow: true,
+                          // dropdownDecoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
+                          // buttonDecoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
                           onChanged: (String? newValue) {
                             setState(() {
                               Provider.of<AttendanceDetailsProvider>(context,
@@ -149,24 +164,38 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                           value: Provider.of<AttendanceDetailsProvider>(context,
                                   listen: false)
                               .selectYear,
-                          dropdownMaxHeight: 200,
-                          selectedItemHighlightColor: AppColor.backgroundColor,
+                          dropdownStyleData: DropdownStyleData(
+                              padding: const EdgeInsets.only(top: 0),
+                                scrollbarTheme: const ScrollbarThemeData(
+                                  thickness: MaterialStatePropertyAll(3),
+                                ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              maxHeight: 200,
+                              useSafeArea: true,
+                              isOverButton: false,
+                              offset: const Offset(0, -10)
+                          ),
+
+                          // dropdownMaxHeight: 200,
+                          // selectedItemHighlightColor: AppColor.backgroundColor,
                           isDense: true,
                           style: const TextStyle(
                               color: AppColor.appBlackColor,
                               fontSize: 14,
                               fontFamily: AppFonts.medium),
-                          iconOnClick: const Icon(Icons.arrow_drop_up),
-                          icon: const Icon(Icons.arrow_drop_down),
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 3,
-                          scrollbarAlwaysShow: true,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                          // iconOnClick: const Icon(Icons.arrow_drop_up),
+                          // icon: const Icon(Icons.arrow_drop_down),
+                          // scrollbarRadius: const Radius.circular(40),
+                          // scrollbarThickness: 3,
+                          // scrollbarAlwaysShow: true,
+                          // dropdownDecoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
+                          // buttonDecoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.circular(10),
+                          // ),
                           onChanged: (String? newValue) {
                             setState(() {
                               Provider.of<AttendanceDetailsProvider>(context,

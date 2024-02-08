@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_fonts.dart';
 
@@ -20,6 +21,7 @@ class TextFieldMixin {
       bool obscureText = false,
       InputBorder? focusedBorder,
       String? labelText,
+        List<TextInputFormatter>? inputFormatters,
       FocusNode? focusNode,
       TextStyle? labelStyle}) {
     return Padding(
@@ -34,6 +36,7 @@ class TextFieldMixin {
         maxLines: maxLines,
         focusNode: focusNode,
         validator: validator,onTap: onTap,
+        inputFormatters: inputFormatters,
         style: const TextStyle(fontFamily: AppFonts.regular,fontSize: 14),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),
@@ -113,6 +116,7 @@ class TextFieldMixin {
         String? labelText,
         bool readOnly = false,
         bool obscureText = false,
+        List<TextInputFormatter>? inputFormatters,
         TextStyle? labelStyle}) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10,0,10,0),
@@ -128,6 +132,7 @@ class TextFieldMixin {
           labelStyle: const TextStyle(color: AppColor.appColor,fontFamily: AppFonts.regular)
         ),
         readOnly: readOnly,
+        inputFormatters: inputFormatters,
         controller: controller,
         onTap: onTap,
         validator: validator,
