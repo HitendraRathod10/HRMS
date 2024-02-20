@@ -128,21 +128,8 @@ class _EmployeeInOutPresentState extends State<EmployeeInOutPresent> {
                       } else if (!currentUserDataSnapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-
                         Map<String, dynamic> data = currentUserDataSnapshot.data!.data() as Map<String, dynamic>;
-                        /*List<String> differenceDateList = [];
-                        String differenceDate;
 
-                        for (int i = snapshot.reportsFromDate.day; i <= snapshot.reportsToDate.day; i++) {
-                          differenceDate = "${snapshot.reportsFromDate.year}"
-                                        "-${snapshot.reportsFromDate.month.toString().length != 1 ? snapshot.reportsFromDate.month :
-                                        '0${snapshot.reportsFromDate.month}'}"
-                                        "-${i.toString().length == 1 ? '0$i' : i}";
-
-                          differenceDateList.add(differenceDate);
-                        }
-                        debugPrint('Differance Date List => $differenceDateList');
-*/
                         return StreamBuilder(
                             stream: InOutFireAuth().mainCollection.
                             where('currentDate', isGreaterThanOrEqualTo: DateFormat('yyyy-MM-dd')
@@ -151,15 +138,6 @@ class _EmployeeInOutPresentState extends State<EmployeeInOutPresent> {
                                 .format(DateTime(snapshot.reportsFromDate.year,
                                 snapshot.reportsFromDate.month + 1, 0))
                                 .toString())
-
-                            // .where("currentDate", isGreaterThanOrEqualTo:
-                            //  DateFormat('dd-MM-yyyy')
-                            //      .format(snapshot.reportsFromDate)
-                            // ).where("endDate", isGreaterThanOrEqualTo:
-                            // DateFormat('dd-MM-yyyy')
-                            //     .format(DateTime(snapshot.reportsFromDate.year,
-                            //     snapshot.reportsFromDate.month + 1, 0))
-                            //     .toString())
                             .snapshots(),
                             builder: (context,
                                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
@@ -176,37 +154,17 @@ class _EmployeeInOutPresentState extends State<EmployeeInOutPresent> {
                                       onPressed: () async {
                                         debugPrint(presentSnapshot.data!.docs.length
                                             .toString());
-                                        //Get.to(
-                                         /* PdfViewInOutPresent(
-                                              DateFormat('dd-MM-yyyy')
-                                                  .format(snapshot.reportsFromDate),
-                                              DateFormat('dd-MM-yyyy')
-                                                  .format(snapshot.reportsToDate),
-                                              DateFormat('dd-MM-yyyy')
-                                                  .format(DateTime.now()),
-                                              data['employeeName'],
-                                              data['department'],
-                                              data['designation'],
-                                              presentSnapshot.data!.docs.length
-                                                  .toString()),
-                                        );*/
-                                        PdfViewInOutPresent().makePdfInOutPresent(DateFormat('dd-MM-yyyy')
-                                            .format(snapshot.reportsFromDate),
-                                            DateFormat('dd-MM-yyyy')
-                                                .format(snapshot.reportsToDate),
-                                            DateFormat('dd-MM-yyyy')
-                                                .format(DateTime.now()),
-                                            data['employeeName'],
-                                            data['department'],
-                                            data['designation'],
-                                            presentSnapshot.data!.docs.length
+                                        PdfViewInOutPresent().makePdfInOutPresent(
+                                          department:data['department'] ,
+                                            designation:data['designation'],
+                                            employeeName:data['employeeName'] ,
+                                            fromDate: DateFormat('dd-MM-yyyy').format(snapshot.reportsFromDate),
+                                            printDate:DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                                            toDate:DateFormat('dd-MM-yyyy').format(snapshot.reportsToDate),
+                                            presentDays: presentSnapshot.data!.docs.length
                                                 .toString()).then((value) {
                                                   Get.to(OpenPdfInOutPresent(linked: value));
-                                          /*setState((){
-                                            Provider.of<ReportsProvider>(context,listen:false).pdf = value;
-                                          });*/
                                         });
-                                        //);
                                       },
                                       child: const Text('View',style: TextStyle(fontFamily: AppFonts.regular),)),
                                   const SizedBox(

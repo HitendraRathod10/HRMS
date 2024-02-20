@@ -118,9 +118,8 @@ class AddEmployeeFireAuth {
         required String manager,
         required String imageUrl,
         required String type}) async {
-    DocumentReference documentReferencer =
-    FirebaseCollection().employeeCollection.doc(email);
-
+    DocumentReference documentReferencer = FirebaseCollection().employeeCollection.doc(email);
+    print("Document Reference $documentReferencer");
     Map<String, dynamic> data = <String, dynamic>{
       "email": email.toString(),
       "employeeName": employeeName.toString(),
@@ -137,7 +136,7 @@ class AddEmployeeFireAuth {
       "manager": manager.toString(),
       "type": 'Employee'
     };
-    debugPrint('employee data=> $data');
+    debugPrint('employee data Map Object => $data');
 
     FirebaseCollection().employeeCollection.get().then((querySnapshot) {
       for (var result in querySnapshot.docs) {

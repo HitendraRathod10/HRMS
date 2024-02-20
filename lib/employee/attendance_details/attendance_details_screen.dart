@@ -290,26 +290,25 @@ class _AttendanceDetailsScreenState extends State<AttendanceDetailsScreen> {
                                   title: Text('${snapshot.data?.docs[index]['currentDate']}',style: const TextStyle(fontSize: 18,fontFamily: AppFonts.medium)),
                                     children: [
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('In Time',style: TextStyle(fontFamily: AppFonts.medium),),
-                                          const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['inTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text('Out Time',style: TextStyle(fontFamily: AppFonts.medium)),
-                                          const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['outTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text('Duration',style: TextStyle(fontFamily: AppFonts.medium)),
-                                          const Spacer(),
-                                          Text('${snapshot.data?.docs[index]['duration']}',style: const TextStyle(fontFamily: AppFonts.medium)),
-                                        ],
-                                      ),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              const Text('In Time',style: TextStyle(fontFamily: AppFonts.medium),),
+                                              const Text('Out Time',style: TextStyle(fontFamily: AppFonts.medium)),
+                                              const Text('Duration',style: TextStyle(fontFamily: AppFonts.medium)),
+                                            ],
+                                          ) ,
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('${snapshot.data?.docs[index]['inTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
+                                              Text('${snapshot.data?.docs[index]['outTime']}',style: const TextStyle(fontFamily: AppFonts.medium)),
+                                              Text('${snapshot.data?.docs[index]['duration']}',style: const TextStyle(fontFamily: AppFonts.medium)),
+                                            ],
+                                          )
+                                        ],)
                                     ],
                                 ),
                               ),

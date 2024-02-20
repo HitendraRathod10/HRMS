@@ -2,14 +2,16 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:employee_attendance_app/utils/app_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
+
 class DownloadPdfFile{
-
-
+  int version = 0;
   Future<bool> _requestPermission(Permission permission) async {
     if (await permission.isGranted) {
       return true;
@@ -21,13 +23,28 @@ class DownloadPdfFile{
     }
     return false;
   }
+  Future<void> getAndroidDeviceInfo() async {
+
+  }
 
   Future<bool> savePdf(url, fileName) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo;
+    try {
+      androidInfo = await deviceInfo.androidInfo;
+       version = int.parse(androidInfo.version.release);
+      print("ANDROID_DEVICE_VERSION $version");
+      print('Android version OpenPdfInOutPresent : ${androidInfo.version.release}');
+      print('Android version OpenPdfInOutSummary : ${androidInfo.model}');
+      print('Android version OpenPdfInOutSummary : ${androidInfo.brand}');
+    } catch (e) {
+      print('Error getting Android device info: $e');
+    }
     Directory? directory;
     // var linked;
     try {
       if (Platform.isAndroid) {
-        if (await _requestPermission(Permission.storage)) {
+        if ((version > 12)?true:await _requestPermission(Permission.storage)  ) {
           directory = await getExternalStorageDirectory();
           String newPath = "";
           List<String> paths = directory!.path.split("/");
@@ -39,7 +56,7 @@ class DownloadPdfFile{
               break;
             }
           }
-          newPath = "$newPath/HRMS Reports";
+          newPath = "$newPath/Download";
           directory = Directory(newPath);
 
           if (!await directory.exists()) {

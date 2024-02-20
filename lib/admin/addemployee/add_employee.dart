@@ -46,21 +46,19 @@ class _AddEmployeeState extends State<AddEmployee> {
   String? _employmentType;
   final List<String> employmentTypes = ['Probation', 'Permanent'];
 
-  Future<File> imageSizeCompress(
-      {required File image,
-        quality = 100,
-        percentage = 10}) async {
-    var path = await FlutterNativeImage.compressImage(image.absolute.path,quality: 100,percentage: 10);
+  Future<File> imageSizeCompress({
+    required File image,
+  }) async {
+    var path = await FlutterNativeImage.compressImage(image.absolute.path,
+        quality: 100, percentage: 50);
     return path;
   }
 
-  void selectProfileImage(BuildContext context) async{
+  void selectProfileImage(BuildContext context) async {
     //Pick Image File
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.image
-    );
-    if(result == null) return;
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
+    if (result == null) return;
     final filePath = result.files.single.path;
     File compressImage = await imageSizeCompress(image: File(filePath!));
     setState(() {
@@ -69,16 +67,13 @@ class _AddEmployeeState extends State<AddEmployee> {
     });
   }
 
-
   void uploadFile() async {
-    //_selectProfileImage(context);
-    //Store Image in firebase database
     if (file == null) return;
     final fireauth = FirebaseAuth.instance.currentUser?.email;
     final destination = 'images/$fireauth';
     try {
       final ref = FirebaseStorage.instance.ref().child(destination);
-      UploadTask uploadsTask =  ref.putFile(file!);
+      UploadTask uploadsTask = ref.putFile(file!);
       final snapshot = await uploadsTask.whenComplete(() {});
       final imageUrl = await snapshot.ref.getDownloadURL().whenComplete(() {});
       if (!mounted) return;
@@ -86,26 +81,37 @@ class _AddEmployeeState extends State<AddEmployee> {
           employeeName: employeeNameController.text,
           emailID: emailController.text,
           password: passwordController.text,
-          context: context
-      );
+          context: context);
       if (user != null) {
         AppUtils.instance.showToast(toastMessage: "Employee Added");
-        AddEmployeeFireAuth().addEmployee(email: emailController.text,
-            employeeName: employeeNameController.text,
-            mobile: mobileController.text, dob: dobController.text,
-            address: addressController.text,
-            designation: designationController.text, department: departmentController.text,
-            branch: branchNameController.text, dateOfJoining: dateOfJoinController.text,
-            imageUrl: imageUrl,
-            employmentType: employmentTypeController.text, exprience: exprienceGradeController.text,
-            manager: managerController.text, type: 'Employee').then((value) {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const AdminBottomNavBarScreen()), (route) => false);
+        AddEmployeeFireAuth()
+            .addEmployee(
+                email: emailController.text.toLowerCase().trim(),
+                employeeName: employeeNameController.text.trim(),
+                mobile: mobileController.text.trim(),
+                dob: dobController.text.trim(),
+                address: addressController.text.trim(),
+                designation: designationController.text.trim(),
+                department: departmentController.text.trim(),
+                branch: branchNameController.text.trim(),
+                dateOfJoining: dateOfJoinController.text.trim(),
+                imageUrl: imageUrl,
+                employmentType: _employmentType!.trim(),
+                exprience: exprienceGradeController.text.trim(),
+                manager: managerController.text.trim(),
+                type: 'Employee')
+            .then((value) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AdminBottomNavBarScreen()),
+              (route) => false);
           // Get.off(AdminBottomNavBarScreen());
           send();
         });
         //FirebaseAuth.instance.signOut();
         if (!mounted) return;
-        Provider.of<LoadingProvider>(context,listen: false).stopLoading();
+        Provider.of<LoadingProvider>(context, listen: false).stopLoading();
       }
       debugPrint("Image URL = $imageUrl");
     } catch (e) {
@@ -113,11 +119,11 @@ class _AddEmployeeState extends State<AddEmployee> {
     }
   }
 
-
   Future<void> send() async {
     debugPrint("send mail on this id :- ${emailController.text}");
     final Email email = Email(
-      body: 'Please find the HRMS credentials below,\n\n To Start HRMS,\n Login ID-${emailController.text} \n Password- ${passwordController.text}',
+      body:
+          'Please find the HRMS credentials below,\n\n To Start HRMS,\n Login ID-${emailController.text} \n Password- ${passwordController.text}',
       subject: 'HRMS Credentials..!!',
       recipients: [emailController.text],
     );
@@ -127,7 +133,6 @@ class _AddEmployeeState extends State<AddEmployee> {
     } catch (error) {
       debugPrint("send method $error");
     }
-
   }
 
   Future selectDateForDOB() async {
@@ -152,8 +157,9 @@ class _AddEmployeeState extends State<AddEmployee> {
         lastDate: DateTime.now());
     if (picked != null) {
       print("pickeddd $picked");
-      setState(
-              () => {dateOfJoinController.text = DateFormat('dd/MM/yyyy').format(picked)});
+      setState(() => {
+            dateOfJoinController.text = DateFormat('dd/MM/yyyy').format(picked)
+          });
       print("dateOfJoinController ${dateOfJoinController.text}");
     }
   }
@@ -166,7 +172,10 @@ class _AddEmployeeState extends State<AddEmployee> {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        title: const Text('Add Employee',style: TextStyle(fontFamily: AppFonts.bold),),
+        title: const Text(
+          'Add Employee',
+          style: TextStyle(fontFamily: AppFonts.bold),
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -174,7 +183,9 @@ class _AddEmployeeState extends State<AddEmployee> {
             key: formKey,
             child: Column(
               children: [
-                const SizedBox(height: 40,),
+                const SizedBox(
+                  height: 40,
+                ),
                 /*const Text(
                     "Create Account",
                     textAlign: TextAlign.center,
@@ -187,36 +198,50 @@ class _AddEmployeeState extends State<AddEmployee> {
                   clipBehavior: Clip.none,
                   children: [
                     GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           selectProfileImage(context);
                           // uploadFile();
                         },
                         child: ClipOval(
-                          child: file == null ? /*Image.network(
+                          child: file == null
+                              ? /*Image.network(
                           'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg',
                           height: 100,
                           width: 100,
                           fit: BoxFit.fill) :*/
-                          Container(
-                              color: AppColor.appColor,
-                              height: 80,width: 80,
-                              child: const Icon(Icons.person_outline_rounded,size: 50,color: AppColor.whiteColor,)) :
-                          Image.file(
-                            file!,
-                            height: 80,width: 80,
-                            fit: BoxFit.fill,),
-                        )
-                    ),
+                              Container(
+                                  color: AppColor.appColor,
+                                  height: 80,
+                                  width: 80,
+                                  child: const Icon(
+                                    Icons.person_outline_rounded,
+                                    size: 50,
+                                    color: AppColor.whiteColor,
+                                  ))
+                              : Image.file(
+                                  file!,
+                                  height: 80,
+                                  width: 80,
+                                  fit: BoxFit.fill,
+                                ),
+                        )),
                     Positioned(
                       left: 50,
                       top: 40,
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           selectProfileImage(context);
                         },
-                        child: ClipOval(child: Container(
-                          height: 40,width: 40,
-                          color:AppColor.whiteColor,child: const Icon(Icons.camera_alt,color: AppColor.appColor,),)),
+                        child: ClipOval(
+                            child: Container(
+                          height: 40,
+                          width: 40,
+                          color: AppColor.whiteColor,
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: AppColor.appColor,
+                          ),
+                        )),
                       ),
                     )
                   ],
@@ -227,7 +252,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                     TextFieldMixin().textFieldWidget(
                       controller: employeeNameController,
                       keyboardType: TextInputType.text,
-                      prefixIcon: const Icon(Icons.person_outline_rounded, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.person_outline_rounded,
+                          color: AppColor.appColor),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                      ],
                       labelText: 'Employee Name',
                       validator: (value) {
                         if (value == null ||
@@ -242,33 +271,37 @@ class _AddEmployeeState extends State<AddEmployee> {
                     TextFieldMixin().textFieldWidget(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        prefixIcon: const Icon(Icons.email_outlined, color: AppColor.appColor),
+                        prefixIcon: const Icon(Icons.email_outlined,
+                            color: AppColor.appColor),
                         labelText: 'Email',
-                        validator: (value){
+                        validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter the employee email';
-                          }else if(value.trim().isEmpty ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@"
-                              r"[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)){
+                          } else if (!RegExp(
+                                  r'^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$',
+                                  caseSensitive: false)
+                              .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
                           return null;
-                        }
-                    ),
+                        }),
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: mobileController,
                       keyboardType: TextInputType.phone,
-                      prefixIcon: const Icon(Icons.phone_iphone_rounded, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.phone_iphone_rounded,
+                          color: AppColor.appColor),
                       labelText: 'Mobile',
-                      inputFormatters: [LengthLimitingTextInputFormatter(10),FilteringTextInputFormatter.digitsOnly],
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(10),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value.trim().isEmpty) {
                           return 'Please enter the employee mobile number';
-                        } else if(value.length < 10){
+                        } else if (value.length < 10) {
                           return "please enter 10-digit mobile number";
                         }
                         return null;
@@ -279,7 +312,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                       controller: dobController,
                       prefixIcon: const Icon(Icons.date_range_outlined,
                           color: AppColor.appColor),
-                      onTap: (){
+                      onTap: () {
                         selectDateForDOB();
                         // FocusScope.of(context).requestFocus(FocusNode());
                       },
@@ -296,8 +329,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: addressController,
-                      prefixIcon:
-                      const Icon(Icons.location_on_outlined, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.location_on_outlined,
+                          color: AppColor.appColor),
                       labelText: 'Address',
                       validator: (value) {
                         if (value == null ||
@@ -308,13 +341,15 @@ class _AddEmployeeState extends State<AddEmployee> {
                         return null;
                       },
                     ),
-
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: designationController,
                       keyboardType: TextInputType.text,
-                      prefixIcon:
-                      const Icon(Icons.account_box, color: AppColor.appColor),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                      ],
+                      prefixIcon: const Icon(Icons.account_box,
+                          color: AppColor.appColor),
                       labelText: 'Designation',
                       validator: (value) {
                         if (value == null ||
@@ -329,9 +364,12 @@ class _AddEmployeeState extends State<AddEmployee> {
                     TextFieldMixin().textFieldWidget(
                       controller: departmentController,
                       keyboardType: TextInputType.text,
-                      prefixIcon:
-                      const Icon(Icons.description_outlined, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.description_outlined,
+                          color: AppColor.appColor),
                       labelText: 'Department',
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                      ],
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
@@ -345,8 +383,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                     TextFieldMixin().textFieldWidget(
                       controller: branchNameController,
                       keyboardType: TextInputType.text,
-                      prefixIcon:
-                      const Icon(Icons.account_balance_outlined, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.account_balance_outlined,
+                          color: AppColor.appColor),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                      ],
                       labelText: 'Branch',
                       validator: (value) {
                         if (value == null ||
@@ -360,12 +401,12 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: dateOfJoinController,
-                      onTap: (){
+                      onTap: () {
                         selectDateForDOJ();
                         // FocusScope.of(context).requestFocus(FocusNode());
                       },
-                      prefixIcon:
-                      const Icon(Icons.date_range_outlined, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.date_range_outlined,
+                          color: AppColor.appColor),
                       labelText: 'Joining Date',
                       validator: (value) {
                         if (value == null ||
@@ -415,84 +456,48 @@ class _AddEmployeeState extends State<AddEmployee> {
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 00),
                       child: DropdownButtonFormField<String>(
                         decoration: const InputDecoration(
-                            prefixIcon:
-                            Icon(Icons.person_pin_outlined, color: AppColor.appColor),
+                            prefixIcon: Icon(Icons.person_pin_outlined,
+                                color: AppColor.appColor),
                             contentPadding: EdgeInsets.fromLTRB(00, 00, 00, 00),
                             labelText: 'Employment Type',
                             labelStyle: TextStyle(
-                                fontFamily: AppFonts.regular, fontSize: 14, color: AppColor.appColor)),
+                                fontFamily: AppFonts.regular,
+                                fontSize: 14,
+                                color: AppColor.appColor)),
                         validator: (value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              value.trim().isEmpty) {
-                            return 'Please select an employee type';
+                          if (value == null || value.isEmpty) {
+                            return 'Please select an employment type';
                           }
                           return null;
                         },
                         value: _employmentType,
-                        onChanged: (value) =>
-                            setState(() => _employmentType = value),
+                        onChanged: (value) {
+                          setState(() {
+                            _employmentType = value;
+                          });
+                          print("EMployee_Type $_employmentType");
+                        },
                         items: const [
                           DropdownMenuItem(
-                            child: Text('Probation'),
                             value: 'Probation',
+                            child: Text('Probation'),
                           ),
                           DropdownMenuItem(
-                            child: Text('Permanent'),
                             value: 'Permanent',
+                            child: Text('Permanent'),
                           ),
                         ],
                       ),
                     ),
-                    /*Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 00, 20, 00),
-                      child: DropdownButtonFormField<String>(
-                        decoration: const InputDecoration(
-                          labelText: 'Employment Type',prefixIcon: Icon(Icons.person_pin_outlined, color: AppColor.appColor),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty|| value.trim().isEmpty) {
-                            return 'Please select an employment type';
-                          }
-                          return null; // No errors
-                        },
-                        items: employmentTypes.map((type) {
-                          return DropdownMenuItem<String>(
-                            value: type,
-                            child: Text(type),
-                          );
-                        }).toList(),
-                        value: selectedEmploymentType,
-                        onChanged: (value) =>
-                            setState(() => selectedEmploymentType = value),
-                      ),
-                    ),*/
-                    /*TextFieldMixin().textFieldWidget(
-                        controller: employmentTypeController,
-                        keyboardType: TextInputType.text,
-                        prefixIcon:
-                        const Icon(Icons.person_pin_outlined, color: AppColor.appColor),
-                        labelText: 'Employment Type',
-                        validator: (value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              value.trim().isEmpty) {
-                            return 'Please enter the employee type';
-                          }
-                          return null;
-                        }
-                    ),*/
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: exprienceGradeController,
                       keyboardType: TextInputType.number,
-                      prefixIcon:
-                      const Icon(Icons.timeline_sharp, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.timeline_sharp,
+                          color: AppColor.appColor),
                       labelText: 'Experience',
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.trim().isEmpty) {
+                        if (value!.isEmpty || value.trim().isEmpty) {
                           return 'Please enter the employee experience';
                         }
                         return null;
@@ -502,13 +507,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                     TextFieldMixin().textFieldWidget(
                       controller: managerController,
                       keyboardType: TextInputType.text,
-                      prefixIcon:
-                      const Icon(Icons.personal_injury_outlined, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.personal_injury_outlined,
+                          color: AppColor.appColor),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                      ],
                       labelText: 'Manager',
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.trim().isEmpty) {
+                        if (value!.isEmpty || value.trim().isEmpty) {
                           return 'Please enter the employee manager';
                         }
                         return null;
@@ -517,8 +523,8 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 10),
                     TextFieldMixin().textFieldWidget(
                       controller: passwordController,
-                      prefixIcon:
-                      const Icon(Icons.lock_outline, color: AppColor.appColor),
+                      prefixIcon: const Icon(Icons.lock_outline,
+                          color: AppColor.appColor),
                       labelText: 'Password',
                       obscureText: passwordVisibility ? false : true,
                       suffixIcon: IconButton(
@@ -535,12 +541,14 @@ class _AddEmployeeState extends State<AddEmployee> {
                                 )
                               : const Icon(Icons.visibility_off,
                                   color: AppColor.appColor)),
-                      validator: (value){
+                      validator: (value) {
                         if (value!.isEmpty || value.trim().isEmpty) {
                           return 'Please enter the password';
                         } else if (value.length < 8) {
                           return 'Password must be atLeast 8 characters';
-                        } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(value)) {
+                        } else if (!RegExp(
+                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                            .hasMatch(value)) {
                           return 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
                         }
                         return null;
@@ -549,20 +557,20 @@ class _AddEmployeeState extends State<AddEmployee> {
                     const SizedBox(height: 20),
                   ],
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.center,
                     child: GestureDetector(
                       onTap: () async {
-
-                        if(file == null){
-                          AppUtils.instance.showToast(toastMessage: 'Please choose employee image');
+                        if (file == null) {
+                          AppUtils.instance.showToast(
+                              toastMessage: 'Please choose employee image');
                         }
                         if (formKey.currentState!.validate()) {
-                          if(file != null) {
-                            Provider.of<LoadingProvider>(context,listen: false).startLoading();
+                          if (file != null) {
+                            Provider.of<LoadingProvider>(context, listen: false)
+                                .startLoading();
                             uploadFile();
                           }
                         }

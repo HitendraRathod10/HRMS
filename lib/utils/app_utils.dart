@@ -8,12 +8,12 @@ class AppUtils{
   AppUtils._privateConstructor();
   static final AppUtils instance = AppUtils._privateConstructor();
 
-  void showToast({String? toastMessage, Color? backgroundColor, Color? textColor}) {
+  void showToast({String? toastMessage, Color? backgroundColor, Color? textColor,Toast? toastLength=Toast.LENGTH_SHORT}) {
     Fluttertoast.showToast(
         msg: toastMessage!,
         backgroundColor: backgroundColor ?? AppColor.appColor,
         textColor: textColor ?? AppColor.whiteColor,
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength:toastLength ,
         gravity: ToastGravity.BOTTOM);
   }
 

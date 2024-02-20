@@ -19,7 +19,6 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
  /* await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyBSSEQrhDvg6IiCY6mXgdad-OEsVnRXj6A",
@@ -35,9 +34,14 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider()),

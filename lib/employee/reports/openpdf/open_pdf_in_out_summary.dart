@@ -1,4 +1,5 @@
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:employee_attendance_app/employee/reports/openpdf/download_pdf_file.dart';
 import 'package:employee_attendance_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,23 @@ class OpenPdfInOutSummary extends StatefulWidget {
 }
 
 class _OpenPdfInOutSummaryState extends State<OpenPdfInOutSummary> {
+  Future<void> getAndroidDeviceInfo() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo;
+    try {
+      androidInfo = await deviceInfo.androidInfo;
+      print('Android version OpenPdfInOutSummary : ${androidInfo.version.release}');
+      print('Android version OpenPdfInOutSummary : ${androidInfo.model}');
+      print('Android version OpenPdfInOutSummary : ${androidInfo.brand}');
+    } catch (e) {
+      print('Error getting Android device info: $e');
+    }
+  }
+  @override
+  void initState() {
+    getAndroidDeviceInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

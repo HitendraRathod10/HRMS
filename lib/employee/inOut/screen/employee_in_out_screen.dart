@@ -95,8 +95,7 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                               }*/
 
                               InOutFireAuth().addInOutTime(
-                                 currentDate: snapshot.date
-                                      .toString().substring(0,10),
+                                 currentDate: snapshot.date.toString().substring(0,10),
                                   inTime: snapshot.inTime.toString(),
                                   outTime: '',
                                   duration: '00:00',
@@ -152,14 +151,14 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                               }
 
                               InOutFireAuth().addInOutTime(
-                                  currentDate: snapshot.date
-                                      .toString()
-                                      .toString().substring(0,10),
+                                  currentDate: snapshot.date.toString().toString().substring(0,10),
                                 //  inTime: snapshot.inTime.toString(),
                                   inTime: inTimeVal,
                                   outTime: snapshot.outTime.toString(),
                                   yearMonth: DateFormat.yMMMM().format(DateTime.now()),
-                                  duration: '${snapshot.entryExitHour.toString().length == 1 ? '0${snapshot.entryExitHour}' : snapshot.entryExitHour}:${snapshot.duration.toString()}');
+                                  // duration: '${snapshot.entryExitHour.toString().length == 1 ? '0${snapshot.entryExitHour}' : snapshot.entryExitHour}:${snapshot.duration.toString()}'
+                              duration: snapshot.durationDiff,
+                              );
                             },
                             child: ButtonMixin().stylishButton(text: 'Out',borderColor: outSelected ? Colors.red : Colors.transparent, borderWidth: 2),
                           )
@@ -187,15 +186,21 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                         return ListView.builder(
                             itemCount: streamSnapshot.data!.docs.length,
                             shrinkWrap: true,
+                            reverse: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
+                              int lastIndex = streamSnapshot.data!.docs.length - 1;
+                              bool isLastItem = index == lastIndex;
+
+                              Color cardColor = isLastItem ?  AppColor.listingBgColor : AppColor.whiteColor;
                               return Card(
-                                  color: index.isOdd == true
-                                      ? AppColor.whiteColor
-                                      : AppColor.listingBgColor,
+                                  // color: index.isOdd == true
+                                  //     ? AppColor.whiteColor
+                                  //     : AppColor.listingBgColor,
+                                 color: cardColor,
                                   child: Padding(
                                     padding:
-                                    const EdgeInsets.only(top: 5, left: 10, right: 10),
+                                    const EdgeInsets.only(top: 10,bottom: 10,left: 10,),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -231,11 +236,9 @@ class _EmployeeInOutScreenState extends State<EmployeeInOutScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            const Expanded(
-                                                flex: 5,
-                                                child: Text(
-                                                  'Duration', style: TextStyle(fontFamily: AppFonts.medium),
-                                                )),
+                                            const Text(
+                                              'Duration : ', style: TextStyle(fontFamily: AppFonts.medium),
+                                            ),
                                             Expanded(
                                                 flex: 1,
                                                 child: Text(

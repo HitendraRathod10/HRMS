@@ -16,12 +16,15 @@ class LeaveStatusApplied extends StatelessWidget {
         title: const Text('Leave Status',style: TextStyle(fontFamily: AppFonts.bold),),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('leave').where('leaveEmail',isEqualTo: FirebaseAuth.instance.currentUser?.email).snapshots(),
+          stream: FirebaseFirestore.instance.collection('leave')
+              .where('leaveEmail', isEqualTo: FirebaseAuth.instance.currentUser?.email)
+              .orderBy('created_at', descending: true)
+              .snapshots(),
           builder: (context,AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if(snapshot.connectionState == ConnectionState.waiting){
               return const Center(child: CircularProgressIndicator());
             }else if (snapshot.hasError) {
-              return const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium)));
+              return  const Center(child: Text("Something went wrong",style: TextStyle(fontFamily: AppFonts.medium)));
             }
             else if (!snapshot.hasData) {
               return const Center(child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium)));

@@ -9,7 +9,7 @@ class TextFieldMixin {
       Color? cursorColor,
       TextInputAction? textInputAction,
       InputDecoration? decoration,
-      TextInputType? keyboardType,
+        TextInputType? keyboardType = TextInputType.text,
       Widget? prefixIcon,
       void Function()? onTap,
       Widget? suffixIcon,
@@ -37,6 +37,7 @@ class TextFieldMixin {
         focusNode: focusNode,
         validator: validator,onTap: onTap,
         inputFormatters: inputFormatters,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         style: const TextStyle(fontFamily: AppFonts.regular,fontSize: 14),
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(0),

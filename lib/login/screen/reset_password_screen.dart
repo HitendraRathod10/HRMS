@@ -60,7 +60,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 50),
                     Align(
-                      alignment: Alignment.bottomRight,
+                      alignment: Alignment.center,
                       child: GestureDetector(
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {

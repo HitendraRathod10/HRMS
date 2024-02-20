@@ -6,9 +6,9 @@ class AddHolidayProvider extends ChangeNotifier{
   Future<void> selectDate(BuildContext context) async {
     picked = await showDatePicker(
         context: context,
-        initialDate: holidayDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(DateTime.now().year, 12, 31));
     if (picked != null && picked != holidayDate) {
         holidayDate = picked!;
         notifyListeners();

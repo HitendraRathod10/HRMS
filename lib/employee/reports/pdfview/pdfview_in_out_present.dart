@@ -60,7 +60,14 @@ class PdfViewInOutPresent{
     OpenFile.open('$path/$fileName');
   }*/
 
-  Future<Uint8List> makePdfInOutPresent(fromDate,toDate,printDate,employeeName,designation,department,presentDays) async {
+  Future<Uint8List> makePdfInOutPresent(
+      {required dynamic fromDate,
+        required dynamic toDate,
+        required dynamic printDate,
+        required dynamic employeeName,
+        required dynamic designation,
+        required dynamic department,
+      presentDays}) async {
     final pdf = pw.Document();
     pdf.addPage(
         pw.MultiPage(

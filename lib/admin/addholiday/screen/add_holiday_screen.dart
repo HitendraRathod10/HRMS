@@ -113,6 +113,9 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter holiday name';
                       }
+                      else if(value.trim().isEmpty){
+                        return "Please enter holiday name";
+                      }
                       return null;
                     },
                   ),
@@ -138,8 +141,10 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                           borderSide: BorderSide(color: AppColor.appColor),
                         ),),
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
+                        if (value!.isEmpty) {
                           return 'Please enter description';
+                        }else if(value.trim().isEmpty){
+                          return "Please enter description";
                         }
                         return null;
                       },
@@ -170,8 +175,8 @@ class _AddHolidayScreenState extends State<AddHolidayScreen> {
                       }*/
                       if(_formKey.currentState!.validate() && Provider.of<AddHolidayProvider>(context,listen: false).picked !=null) {
                         AddHolidayFireAuth().addPublicHoliday(holidayDate: DateFormat('dd-MM-yyyy').format(Provider.of<AddHolidayProvider>(context,listen: false).holidayDate),
-                            holidayName: holidayNameController.text,
-                            holidayDescription: descriptionController.text);
+                            holidayName: holidayNameController.text.trim(),
+                            holidayDescription: descriptionController.text.trim());
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const AdminBottomNavBarScreen()), (route) => false);
                         Provider.of<AddHolidayProvider>(context,listen: false).picked =null;
                         holidayNameController.clear();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../employee/leave/auth/leave_fire_auth.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_fonts.dart';
+import '../../utils/app_utils.dart';
 
 class LeaveStatusScreen extends StatelessWidget {
   const LeaveStatusScreen({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class LeaveStatusScreen extends StatelessWidget {
             return const Center(child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium)));
           } else if (snapshot.requireData.docChanges.isEmpty){
             return const Center(child: Text("No Data Found",style: TextStyle(fontFamily: AppFonts.medium)));
+
           } else{
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
@@ -94,7 +96,8 @@ class LeaveStatusScreen extends StatelessWidget {
                               children: [
                                 TextButton(
                                   onPressed: (){
-                                    LeaveFireAuth().applyLeave(
+                                    LeaveFireAuth().applyLeaveAdmin(
+                                         context: context,
                                         leaveFrom: snapshot.data?.docs[index]['leaveForm'],
                                         leaveTo: snapshot.data?.docs[index]['leaveTo'],
                                         leaveDays: snapshot.data?.docs[index]['leaveDays'],
@@ -106,14 +109,19 @@ class LeaveStatusScreen extends StatelessWidget {
                                         leaveHours: snapshot.data?.docs[index]['leaveHours'],
                                         leaveToTime: snapshot.data?.docs[index]['leaveToTime'],
                                         leaveEmployeeName: snapshot.data?.docs[index]['leaveEmployeeName']
-                                    );
+                                    ).then((value) {
+                                      const msg ='Leave approved successfully';
+                                      AppUtils.instance.showToast(toastMessage: msg);
+                                    });
+
                                   },
                                   child: const Text('Approved',style: TextStyle(color: AppColor.appColor,fontFamily: AppFonts.medium),),
                                 ),
                                 const SizedBox(width: 20),
                                 TextButton(
                                   onPressed: (){
-                                    LeaveFireAuth().applyLeave(
+                                    LeaveFireAuth().applyLeaveAdmin(
+                                      context: context,
                                         leaveFrom: snapshot.data?.docs[index]['leaveForm'],
                                         leaveTo: snapshot.data?.docs[index]['leaveTo'],
                                         leaveDays: snapshot.data?.docs[index]['leaveDays'],
@@ -125,7 +133,11 @@ class LeaveStatusScreen extends StatelessWidget {
                                         leaveHours: snapshot.data?.docs[index]['leaveHours'],
                                         leaveToTime: snapshot.data?.docs[index]['leaveToTime'],
                                         leaveEmployeeName: snapshot.data?.docs[index]['leaveEmployeeName']
-                                    );
+                                    ).then((value) {
+                                      const msg ='Leave rejected successfully';
+                                      AppUtils.instance.showToast(toastMessage: msg);
+                                    });
+                                    //
                                   },
                                   child: const Text('Rejected',style: TextStyle(color: AppColor.appColor,fontFamily: AppFonts.medium)),
                                 )

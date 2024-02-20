@@ -49,7 +49,7 @@ class EmployeeDrawerScreen extends StatelessWidget {
                               )) :
                           Image.network(
                               '${data['imageUrl']}',
-                              height: 70, width: 70, fit: BoxFit.fill),
+                              height: 70, width: 70, fit: BoxFit.cover),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -167,28 +167,59 @@ class _LoginScreenAdminState extends State<LoginScreenAdmin> {
                   const SizedBox(height: 30),
 
                   Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.center,
                     child: GestureDetector(
+                      // onTap: () async {
+                      //   FocusScope.of(context).unfocus();
+                      //   if(_formKey.currentState!.validate()){
+                      //     Provider.of<LoadingProvider>(context,listen: false).startLoading();
+                      //     User? user = await LoginAuth.signInUsingEmailPassword(
+                      //       email: emailController.text.toLowerCase().trim(),
+                      //       password: passwordController.text.trim(), context: context,
+                      //     );
+                      //     if (user != null) {
+                      //       AppUtils.instance.setPref(PreferenceKey.boolKey, PreferenceKey.prefLogin, true);
+                      //       AppUtils.instance.setPref(PreferenceKey.stringKey, PreferenceKey.prefEmail, emailController.text);
+                      //       if (!mounted) return;
+                      //       Provider.of<LoginProvider>(context,listen: false).getSharedPreferenceData(emailController.text);
+                      //       if (_formKey.currentState!.validate()) {
+                      //         Provider.of<LoginProvider>(context,listen: false).getData(emailController.text);
+                      //       }
+                      //       Provider.of<LoadingProvider>(context,listen: false).stopLoading();
+                      //     }
+                      //   }
+                      // },
                       onTap: () async {
                         FocusScope.of(context).unfocus();
-                        if(_formKey.currentState!.validate()){
-                          Provider.of<LoadingProvider>(context,listen: false).startLoading();
+                        if (_formKey.currentState!.validate()) {
+                          Provider.of<LoadingProvider>(context, listen: false).startLoading();
                           User? user = await LoginAuth.signInUsingEmailPassword(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(), context: context,
+                            email: emailController.text.trim().toLowerCase(),
+                            password: passwordController.text.trim(),
+                            context: context,
                           );
+
                           if (user != null) {
+                            // User authentication successful
                             AppUtils.instance.setPref(PreferenceKey.boolKey, PreferenceKey.prefLogin, true);
                             AppUtils.instance.setPref(PreferenceKey.stringKey, PreferenceKey.prefEmail, emailController.text);
+
                             if (!mounted) return;
-                            Provider.of<LoginProvider>(context,listen: false).getSharedPreferenceData(emailController.text);
+                            Provider.of<LoginProvider>(context, listen: false).getSharedPreferenceData(emailController.text);
+
                             if (_formKey.currentState!.validate()) {
-                              Provider.of<LoginProvider>(context,listen: false).getData(emailController.text);
+                              Provider.of<LoginProvider>(context, listen: false).getData(emailController.text);
                             }
-                            Provider.of<LoadingProvider>(context,listen: false).stopLoading();
+
+                            Provider.of<LoadingProvider>(context, listen: false).stopLoading();
+                          } else {
+                            // User authentication failed (wrong email or password)
+                            Provider.of<LoadingProvider>(context, listen: false).stopLoading();
+                            AppUtils.instance.showToast(toastMessage:'Invalid email or password. Please try again.');
                           }
                         }
                       },
+
                       child: ButtonMixin()
                           .stylishButton(onPress: () {}, text: 'Sign In'),
                     ),
